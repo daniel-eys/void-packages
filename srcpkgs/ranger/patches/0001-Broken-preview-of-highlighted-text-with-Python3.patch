@@ -1,0 +1,68 @@
+From f9c49f9c2e7ec680f9a06685eba75787e7d2ed7b Mon Sep 17 00:00:00 2001
+From: Baranovskiy Konstantin <baranovskiykonstantin@gmail.com>
+Date: Sat, 20 Oct 2018 20:01:02 +0300
+Subject: [PATCH] Broken preview of highlighted text with Python3
+
+ranger/core/loader.py:
+CommandLoader.generate() gets text for preview panel from scope.sh
+as the blocks of byrearray (max 512 bytes). This blocks immediately
+decoded to utf-8. But in case when muli-byte unicode characters is
+present they may be split and python will can't correctly to decode
+it. For example: b'abc\xd0', b'\x9a...'
+b'\xd0\x9a' - is cyrillic letter 'K' and it can't be decoded
+separately (UnicodeDecodeError occurs).
+So, received data blocks (bytearrays) must be collected and
+only after that decoded as one whole byrearray.
+
+Fixes #906
+Fixes #967
+Fixes #1166
+---
+ ranger/core/loader.py | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+diff --git ranger/core/loader.py ranger/core/loader.py
+index 274dc610..9f32535f 100644
+--- ranger/core/loader.py
++++ ranger/core/loader.py
+@@ -194,6 +194,7 @@ class CommandLoader(  # pylint: disable=too-many-instance-attributes
+                 selectlist.append(process.stdout)
+             if not self.silent:
+                 selectlist.append(process.stderr)
++            read_stdout = None
+             while process.poll() is None:
+                 yield
+                 if self.finished:
+@@ -210,10 +211,11 @@ class CommandLoader(  # pylint: disable=too-many-instance-attributes
+                                 self.fm.notify(read, bad=True)
+                         elif robjs == process.stdout:
+                             read = robjs.read(512)
+-                            if py3:
+-                                read = safe_decode(read)
+                             if read:
+-                                self.stdout_buffer += read
++                                if read_stdout is None:
++                                    read_stdout = read
++                                else:
++                                    read_stdout += read
+                 except select.error:
+                     sleep(0.03)
+             if not self.silent:
+@@ -223,9 +225,12 @@ class CommandLoader(  # pylint: disable=too-many-instance-attributes
+                     self.fm.notify(line, bad=True)
+             if self.read:
+                 read = process.stdout.read()
++                if read:
++                    read_stdout += read
++            if read_stdout:
+                 if py3:
+-                    read = safe_decode(read)
+-                self.stdout_buffer += read
++                    read_stdout = safe_decode(read_stdout)
++                self.stdout_buffer += read_stdout
+         self.finished = True
+         self.signal_emit('after', process=process, loader=self)
+ 
+-- 
+2.21.0
+
