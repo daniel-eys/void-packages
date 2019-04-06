@@ -1,0 +1,31 @@
+From fb09607e1d78261b5532323d48ddddbe0f5101ed Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
+Date: Sat, 15 Dec 2018 00:08:30 +0100
+Subject: [PATCH] set locale
+
+---
+ slstatus.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git slstatus.c slstatus.c
+index 96fa5b6..82420ab 100644
+--- slstatus.c
++++ slstatus.c
+@@ -1,5 +1,6 @@
+ /* See LICENSE file for copyright and license details. */
+ #include <errno.h>
++#include <locale.h>
+ #include <signal.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -68,6 +69,7 @@ main(int argc, char *argv[])
+ 		usage();
+ 	}
+ 
++	setlocale(LC_ALL, "");
+ 	memset(&act, 0, sizeof(act));
+ 	act.sa_handler = terminate;
+ 	sigaction(SIGINT,  &act, NULL);
+-- 
+2.21.0
+
