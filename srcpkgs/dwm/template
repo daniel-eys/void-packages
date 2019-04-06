@@ -1,7 +1,7 @@
 # Template file for 'dwm'
 pkgname=dwm
 version=6.2
-revision=1
+revision=2
 makedepends="libXinerama-devel libXft-devel freetype-devel"
 short_desc="Dynamic window manager for X"
 maintainer="Juan RP <xtraeme@voidlinux.org>"
@@ -10,10 +10,14 @@ homepage="http://dwm.suckless.org"
 distfiles="https://dl.suckless.org/dwm/dwm-${version}.tar.gz"
 checksum=97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e
 
-do_build() {
+pre_build() {
 	[ -e ${FILESDIR}/config.h ] && cp ${FILESDIR}/config.h config.h
-	sed -i "/CFLAGS/s|\${CPPFLAGS}|& $CFLAGS|g" config.mk
-	sed -i "/LDFLAGS/s|\-s|$LDFLAGS|g" config.mk
+	vsed -i -e 's/^CPPFLAGS\s\+=/CPPFLAGS \+=/' config.mk
+	vsed -i -e 's/^CFLAGS\s\+=/CFLAGS \+=/' config.mk
+	vsed -i -e 's/^LDFLAGS\s\+=/LDFLAGS \+=/' config.mk
+}
+
+do_build() {
 	make CC=$CC INCS="-I. -I${XBPS_CROSS_BASE}/usr/include/freetype2" LIBS="-lX11 -lXinerama -lXft -lfontconfig"
 }
 

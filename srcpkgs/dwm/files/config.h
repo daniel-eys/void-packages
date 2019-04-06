@@ -20,12 +20,12 @@ static const char *colors[][3] = {
 
 /* tagging */
 static const char *tags[] = {
-	"0", /* "" 0 music */
-	"1", /* "" 1 web   */
-	"2", /* "" 2 mail  */
-	"3", /* "" 3 term  */
-	"4", /* "" 4 chat  */
-	"5", /* "" 5 misc  */
+	"", /*  0 music */
+	"", /*  1 web   */
+	"", /*  2 mail  */
+	"", /*  3 term  */
+	"", /*  4 chat  */
+	"", /*  5 misc  */
 };
 
 static const Rule rules[] = {
@@ -83,8 +83,11 @@ static const char     *padcmd[] = { "st", "-t", "scratchpad", "-g", "80x24-50+40
 static const char    *lockcmd[] = { "i3lock", "-c", "000000", NULL };
 static const char  *rebootcmd[] = { "sudo", "reboot", NULL };
 static const char    *shutcmd[] = { "sudo", "poweroff", NULL };
-static const char    *suspcmd[] = { "sudo", "suspend", NULL };
-static const char   *hibercmd[] = { "sudo", "hibernate", NULL };
+static const char    *suspcmd[] = { "sudo", "zzz", NULL };
+static const char   *hibercmd[] = { "sudo", "ZZZ", NULL };
+static const char    *voldown[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
+static const char      *volup[] = { "amixer", "-q", "set", "Master", "5%+", NULL };
+static const char    *volmute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -103,6 +106,9 @@ static Key keys[] = {
 	{ ControlMask|MODKEY,           XK_i,      spawn,          SHCMD("$HOME/bin/set-screen") },
 	{ ControlMask|MODKEY,           XK_w,      spawn,          SHCMD("$HOME/bin/set-wallpaper") },
 	{ MODKEY,                       XK_g,      spawn,          SHCMD("$HOME/bin/focus-browser") },
+	{ 0,                      0x1008ff11,      spawn,          {.v = voldown } },
+	{ 0,                      0x1008ff13,      spawn,          {.v = volup } },
+	{ 0,                      0x1008ff12,      spawn,          {.v = volmute } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_c,      switchcol,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
