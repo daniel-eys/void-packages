@@ -56,6 +56,7 @@ static const char unknown_str[] = "n/a";
  * uptime              system uptime                   NULL
  * username            username of current user        NULL
  * vol_perc            OSS/ALSA volume in percent      mixer file (/dev/mixer)
+ * vol_raw             ALSA raw volume                 channel (Master)
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
@@ -64,6 +65,7 @@ static const struct arg args[] = {
 	/* function       format         argument */
 	{ netspeed_rx,    "%7s  ",      "wlp3s0"                              },
 	{ netspeed_tx,    "%7s  | ",    "wlp3s0"                              },
+	{ vol_raw,        "%2s  | ",    "Master"                              },
 	{ cpu_perc,       "%3s  ",      NULL                                  },
 	{ temp,           "%3s  ",      "/sys/class/hwmon/hwmon1/temp1_input" },
 	{ ram_perc,       "%3s  | ",    NULL                                  },

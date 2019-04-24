@@ -1,7 +1,7 @@
-From fb09607e1d78261b5532323d48ddddbe0f5101ed Mon Sep 17 00:00:00 2001
+From d280ed52f36c35506d423bbb63d9527048e7aab7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
-Date: Sat, 15 Dec 2018 00:08:30 +0100
-Subject: [PATCH] set locale
+Date: Wed, 24 Apr 2019 00:09:13 +0200
+Subject: [PATCH 1/2] setlocale
 
 ---
  slstatus.c | 2 ++

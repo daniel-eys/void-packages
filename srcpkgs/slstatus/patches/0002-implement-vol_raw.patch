@@ -1,0 +1,105 @@
+From 07ad82b9efa4c14d483849a4ba87230ed8d562d7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
+Date: Wed, 24 Apr 2019 23:26:17 +0200
+Subject: [PATCH 2/2] implement vol_raw
+
+---
+ components/volume.c | 33 +++++++++++++++++++++++++++++++++
+ config.def.h        |  1 +
+ config.mk           |  6 +++---
+ slstatus.h          |  1 +
+ 4 files changed, 38 insertions(+), 3 deletions(-)
+
+diff --git components/volume.c components/volume.c
+index 61cec90..9eccd78 100644
+--- components/volume.c
++++ components/volume.c
+@@ -74,6 +74,7 @@
+ 	}
+ #else
+ 	#include <sys/soundcard.h>
++	#include <alsa/asoundlib.h>
+ 
+ 	const char *
+ 	vol_perc(const char *card)
+@@ -106,4 +107,36 @@
+ 
+ 		return bprintf("%d", v & 0xff);
+ 	}
++
++	const char *
++	vol_raw(const char *channel)
++	{
++		/* ALSA mixer handle */
++		snd_mixer_t *handle;
++		snd_mixer_selem_id_t *sid;
++		const char *card = "default";
++		long vol;
++
++		/* Open empty mixer */
++		snd_mixer_open(&handle, 0);
++		snd_mixer_attach(handle, card);
++		snd_mixer_selem_register(handle, NULL, NULL);
++
++		/* Load mixer elements */
++		snd_mixer_load(handle);
++
++		/* Configure simple element */
++		snd_mixer_selem_id_alloca(&sid);
++		snd_mixer_selem_id_set_index(sid, 0);
++		snd_mixer_selem_id_set_name(sid, channel);
++		snd_mixer_elem_t *elem = snd_mixer_find_selem(handle, sid);
++
++		/* Get playback volume */
++		snd_mixer_selem_get_playback_volume(elem, 0, &vol);
++
++		/* Close handle */
++		snd_mixer_close(handle);
++
++		return bprintf("%ld", vol);
++	}
+ #endif
+diff --git config.def.h config.def.h
+index e06be66..269206e 100644
+--- config.def.h
++++ config.def.h
+@@ -58,6 +58,7 @@ static const char unknown_str[] = "n/a";
+  * uptime              system uptime                   NULL
+  * username            username of current user        NULL
+  * vol_perc            OSS/ALSA volume in percent      mixer file (/dev/mixer)
++ * vol_raw             ALSA raw volume                 channel (Master)
+  * wifi_perc           WiFi signal in percent          interface name (wlan0)
+  * wifi_essid          WiFi ESSID                      interface name (wlan0)
+  */
+diff --git config.mk config.mk
+index 3b32b7c..95faa34 100644
+--- config.mk
++++ config.mk
+@@ -12,9 +12,9 @@ X11LIB = /usr/X11R6/lib
+ 
+ # flags
+ CPPFLAGS = -I$(X11INC) -D_DEFAULT_SOURCE
+-CFLAGS   = -std=c99 -pedantic -Wall -Wextra -Os
+-LDFLAGS  = -L$(X11LIB) -s
+-LDLIBS   = -lX11
++CFLAGS   += -std=c99 -pedantic -Wall -Wextra -Os
++LDFLAGS  += -L$(X11LIB) -s
++LDLIBS   = -lX11 -lasound
+ 
+ # compiler and linker
+ CC = cc
+diff --git slstatus.h slstatus.h
+index 08f610a..6945466 100644
+--- slstatus.h
++++ slstatus.h
+@@ -75,6 +75,7 @@ const char *uid(void);
+ 
+ /* volume */
+ const char *vol_perc(const char *card);
++const char *vol_raw(const char *channel);
+ 
+ /* wifi */
+ const char *wifi_perc(const char *interface);
+-- 
+2.21.0
+
