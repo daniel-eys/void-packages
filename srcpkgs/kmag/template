@@ -1,6 +1,6 @@
 # Template file for 'kmag'
 pkgname=kmag
-version=19.04.2
+version=19.08.0
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules kcoreaddons kdoctools python qt5-host-tools qt5-qmake"
@@ -10,4 +10,4 @@ maintainer="Piotr Wójcik <chocimier@tlen.pl>"
 license="GPL-2.0-or-later"
 homepage="https://www.kde.org/applications/utilities/kmag/"
 distfiles="${KDE_SITE}/applications/${version}/src/kmag-${version}.tar.xz"
-checksum=257d6fa37492c12b0b75c8bcefa3971e7fb563c48e3c2912c1e3b540b7c31b2a
+checksum=7d42c254e62750899e429482c2b6ed3b4b1e8c5a66fbc371eec656421817d0a4

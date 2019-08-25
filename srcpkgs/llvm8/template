@@ -1,7 +1,7 @@
 # Template file for 'llvm8'
 pkgname=llvm8
 version=8.0.0
-revision=4
+revision=7
 wrksrc="llvm-${version}.src"
 build_style=cmake
 configure_args="
@@ -17,7 +17,7 @@ makedepends="python-devel zlib-devel libffi-devel libedit-devel
  libxml2-devel binutils-devel libatomic-devel"
 depends="libllvm8"
 short_desc="Low Level Virtual Machine"
-maintainer="Rasmus Thomsen <oss@cogitri.dev>"
+maintainer="Enno Boland <gottox@voidlinux.org>"
 license="NCSA"
 homepage="https://www.llvm.org"
 distfiles="https://releases.llvm.org/${version}/llvm-${version}.src.tar.xz
@@ -35,8 +35,19 @@ checksum="8872be1b12c61450cacc82b3d153eab02be2546ef34fa3580ed14137bb26224c
 disable_parallel_builds=yes
 lib32disabled=yes
 
+_lldb_enable=yes
+
+if [ "$CROSS_BUILD" ]; then
+	_lldb_enable=no
+fi
+
+case "$XBPS_TARGET_MACHINE" in
+	ppc64le*) ;;
+	ppc*) _lldb_enable=no ;;
+esac
+
 subpackages="clang-tools-extra clang clang-analyzer libllvm8"
-if [ -z "$CROSS_BUILD" ]; then
+if [ "$_lldb_enable" = "yes" ]; then
 	# XXX fails to cross compile due to python
 	subpackages+=" lldb lldb-devel"
 fi
@@ -60,7 +71,7 @@ post_patch() {
 		patch -sNp1 -i ${i}
 	done
 
-	if [ -z "$CROSS_BUILD" ]; then
+	if [ "$_lldb_enable" = "yes" ]; then
 		cd ${XBPS_BUILDDIR}/lldb-${version}.src
 		for i in ${FILESDIR}/patches/lldb/*.patch; do
 			msg_normal "Applying $i to lldb\n"
@@ -84,7 +95,7 @@ post_patch() {
 		mv ${XBPS_BUILDDIR}/lld-${version}.src ${wrksrc}/tools/lld
 	fi
 	# Move lldb files into the llvm source.
-	if [ -z "$CROSS_BUILD" -a -d ${XBPS_BUILDDIR}/lldb-${version}.src ]; then
+	if [ "$_lldb_enable" = "yes" -a -d ${XBPS_BUILDDIR}/lldb-${version}.src ]; then
 		mv ${XBPS_BUILDDIR}/lldb-${version}.src ${wrksrc}/tools/lldb
 	fi
 	# Move compiler-rt files into the llvm source.
@@ -104,6 +115,13 @@ pre_configure() {
 	# Vastly reduce size of debugging symbols:
 	CFLAGS=${CFLAGS/ -g/ -g1}
 	CXXFLAGS=${CXXFLAGS/ -g/ -g1}
+
+	# since gcc9, the build likes to blow up for ppc32 apparently because
+	# of clang being too large for a 24-bit relative call to the PLT, so
+	# optimize for size instead
+	case "$XBPS_TARGET_MACHINE" in
+		ppc|ppc-musl) configure_args+=" -DVOID_CXX_OPT_FLAGS=-Os" ;;
+	esac
 
 	if [ "$CROSS_BUILD" ]; then
 		msg_normal "Building host tblgen\n"
@@ -158,7 +176,7 @@ do_install() {
 }
 
 clang-analyzer_package() {
-	noarch=yes
+	archs=noarch
 	pycompile_dirs="usr/share/scan-view"
 	depends="clang-${version}_${revision} python"
 	short_desc+=" - A source code analysis framework"
@@ -216,6 +234,7 @@ lld_package() {
 	homepage="https://lld.llvm.org"
 	pkg_install() {
 		vmove usr/bin/lld*
+		vmove usr/bin/wasm-ld
 		vmove usr/bin/ld.lld*
 	}
 }

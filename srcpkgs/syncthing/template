@@ -1,6 +1,6 @@
 # Template file for 'syncthing'
 pkgname=syncthing
-version=1.1.4
+version=1.2.1
 revision=1
 build_style=go
 go_import_path="github.com/syncthing/syncthing"
@@ -11,10 +11,10 @@ hostmakedepends="git"
 short_desc="Open Source Continuous File Synchronization"
 maintainer="Duncaen <duncaen@voidlinux.org>"
 license="MPL-2.0"
-#changelog="https://github.com/syncthing/syncthing/releases"
+changelog="https://github.com/syncthing/syncthing/releases"
 homepage="http://syncthing.net/"
 distfiles="https://github.com/syncthing/${pkgname}/archive/v${version}.tar.gz"
-checksum=99f34f6b3f3289ca8526eb18cbe453efdd81f3e48838d85527acb0177a13f48c
+checksum=4274126059f854fa166d4610d6797116ee56be8b804abc1f4c6b02f650b78f52
 
 pre_build() {
 	GOARCH= go run script/genassets.go gui > ./lib/auto/gui.files.go

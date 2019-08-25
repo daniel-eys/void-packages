@@ -1,6 +1,6 @@
 # Template file for 'xterm'
 pkgname=xterm
-version=346
+version=348
 revision=1
 build_style=gnu-configure
 configure_args="--enable-wide-chars --enable-88-color --enable-broken-osc
@@ -10,17 +10,17 @@ configure_args="--enable-wide-chars --enable-88-color --enable-broken-osc
  --with-app-defaults=/usr/share/X11/app-defaults --enable-i18n
  --disable-full-tgetent --disable-imake --enable-doublechars
  --enable-freetype --enable-tcap-query --enable-logging --enable-dabbrev
- --with-pkg-config=yes --enable-exec-xterm --with-utempter"
+ --with-pkg-config=yes --enable-exec-xterm --with-utempter --enable-sixel-graphics"
 hostmakedepends="pkg-config"
 makedepends="libXaw-devel libXft-devel libutempter-devel libxkbfile-devel
  ncurses-devel"
 short_desc="X Terminal Emulator"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Frank Steinborn <steinex@nognu.de>"
 license="MIT"
 homepage="http://invisible-island.net/xterm/"
 changelog="http://invisible-island.net/xterm/xterm.log.html"
 distfiles="https://invisible-mirror.net/archives/xterm/xterm-${version}.tgz"
-checksum=cf327d73c058354d6816250fbd2ce439da0fcfd991ad48adc0e7c0c715ac8a77
+checksum=8b1f5121dbf3690de9d85a3b9329e3357021705dd7c21da192e47542769275be
 
 post_install() {
 	for f in {u,}xterm.desktop; do

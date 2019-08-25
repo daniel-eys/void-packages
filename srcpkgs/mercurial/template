@@ -1,6 +1,6 @@
 # Template file for 'mercurial'
 pkgname=mercurial
-version=4.9.1
+version=5.0.2
 revision=1
 build_style=python2-module
 pycompile_module="hgdemandimport hgext hgext3rd mercurial"
@@ -8,11 +8,11 @@ hostmakedepends="python-devel"
 makedepends="python-devel"
 depends="ca-certificates"
 short_desc="Fast, lightweight source control management system"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Orphaned <orphan@voidlinux.org>"
 license="GPL-2.0-or-later"
 homepage="https://www.mercurial-scm.org/"
 distfiles="https://www.mercurial-scm.org/release/mercurial-${version}.tar.gz"
-checksum=1bdd21bb87d1e05fb5cd395d488d0e0cc2f2f90ce0fd248e31a03595da5ccb47
+checksum=29b850792f1f054cece5b8de8e815dbbe266e1d11814c3755290c0879883c0f8
 
 post_install() {
 	vmkdir usr/share/man/man1

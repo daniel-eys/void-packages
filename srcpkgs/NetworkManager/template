@@ -1,19 +1,22 @@
 # Template file for 'NetworkManager'
 pkgname=NetworkManager
-version=1.18.1
-revision=1
+version=1.18.2
+revision=2
 build_style=meson
 build_helper="gir"
 configure_args="-Dpolkit_agent=true -Dsystemd_journal=false
  -Dlibaudit=no -Dovs=false -Dlibnm_glib=true -Dselinux=false
  -Dmodify_system=true -Dpolkit_agent=true -Dsystemdsystemunitdir=no
  -Dpppd=/usr/bin/pppd -Dqt=false
+ -Dsession_tracking_consolekit=false
  -Dpppd_plugin_dir=/usr/lib/pppd/2.4.7 -Dresolvconf=/usr/bin/resolvconf
  -Ddhclient=/usr/bin/dhclient -Dkernel_firmware_dir=/usr/lib/firmware
  -Ddnsmasq=/usr/bin/dnsmasq -Ddbus_conf_dir=/etc/dbus-1/system.d
  -Dudev_dir=/usr/lib/udev -Dintrospection=$(vopt_if gir true false)
  -Dvapi=$(vopt_if vala true false)
- -Dsession_tracking=$(vopt_if elogind elogind no)"
+ -Dsession_tracking=$(vopt_if elogind elogind no)
+ -Dsuspend_resume=$(vopt_if elogind elogind no)
+ -Dconfig_dhcp_default=internal"
 hostmakedepends="gettext-devel glib-devel libxslt-devel pkg-config
  intltool dbus-glib-devel jansson-devel $(vopt_if vala vala)
  $(vopt_if gir 'python3-gobject')"
@@ -22,13 +25,13 @@ makedepends="libuuid-devel nss-devel dbus-glib-devel libgudev-devel
  ModemManager-devel readline-devel libndp-devel newt-devel jansson-devel
  libpsl-devel eudev-libudev-devel
  $(vopt_if gir libgirepository-devel) $(vopt_if elogind elogind-devel)"
-depends="dbus dhclient iproute2 openresolv wpa_supplicant"
+depends="dbus iproute2 openresolv wpa_supplicant"
 short_desc="Network Management daemon"
-maintainer="Rasmus Thomsen <oss@cogitri.dev>"
+maintainer="Enno Boland <gottox@voidlinux.org>"
 license="GPL-2.0-or-later"
 homepage="https://wiki.gnome.org/Projects/NetworkManager"
 distfiles="${GNOME_SITE}/${pkgname}/${version%.*}/${pkgname}-${version}.tar.xz"
-checksum=0d477d4dd08ebe7fe089e0a1141b61a09c38c98498cf3a112cba2be97d166f1f
+checksum=4dd97ca974cd1f97990746527258f551f4257cbf011fecd01d10b7d74a6fa5c3
 lib32disabled=yes
 conf_files="/etc/${pkgname}/${pkgname}.conf"
 make_dirs="

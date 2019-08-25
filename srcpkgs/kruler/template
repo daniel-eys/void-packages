@@ -1,6 +1,6 @@
 # Template file for 'kruler'
 pkgname=kruler
-version=19.04.2
+version=19.08.0
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules kcoreaddons pkg-config"
@@ -10,7 +10,7 @@ maintainer="Piotr Wójcik <chocimier@tlen.pl>"
 license="GPL-2.0-or-later"
 homepage="https://www.kde.org/applications/graphics/kruler/"
 distfiles="${KDE_SITE}/applications/${version}/src/kruler-${version}.tar.xz"
-checksum=57d6fdea99e1bbdea50c9a1600fd657a2328b108f5894eed7b32a84c4996c13e
+checksum=a78d054359b559b612dd1dac8f0974f554fb7a52bd8de7152de88866719f9226
 
 if [ -n "$CROSS_BUILD" ]; then
 	hostmakedepends+=" kconfig kdoctools python qt5-host-tools qt5-qmake"

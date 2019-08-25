@@ -1,6 +1,6 @@
 # Template file for 'zfs'
 pkgname=zfs
-version=0.8.0
+version=0.8.1
 revision=1
 build_style=gnu-configure
 configure_args="--with-config=user --with-mounthelperdir=/usr/bin
@@ -14,12 +14,12 @@ maintainer="Toyam Cox <Vaelatern@voidlinux.org>"
 license="CDDL-1.0"
 homepage="https://zfsonlinux.org/"
 distfiles="https://github.com/zfsonlinux/zfs/releases/download/zfs-${version}/zfs-${version}.tar.gz"
-checksum=0fd92e87f4b9df9686f18e2ac707c16b2eeaf00f682d41c20ea519f3a0fe4705
+checksum=0af79fde44b7b8ecb94d5166ce2e4fff7409c20ed874c2d759db92909e6c2799
 
 replaces="spl<=0.7.13_1" # Because SPL was merged into zfs in 0.8.0
 
 dkms_modules="zfs ${version}"
-depends="dkms>=2.2.0.3_9 perl"
+depends="dkms>=2.2.0.3_9 perl python3"
 
 pre_configure() {
 	export CFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/tirpc/"

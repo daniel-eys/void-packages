@@ -1,6 +1,6 @@
 # Template file for 'kidletime'
 pkgname=kidletime
-version=5.59.0
+version=5.61.0
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
@@ -11,7 +11,7 @@ maintainer="John <johnz@posteo.net>"
 license="LGPL-2.0-or-later"
 homepage="https://projects.kde.org/projects/frameworks/kidletime"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
-checksum=f1eb9baa29b8b4ab65c5938126e2a9020159d4b535b8ba5700a3602e3005d2df
+checksum=8fb302dcc5b891ac2f06b5278bd6e08043772f3325bc209175c945280621fca2
 
 kidletime-devel_package() {
 	short_desc+=" - development"

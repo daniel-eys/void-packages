@@ -1,7 +1,7 @@
 # Template file for 'webkit2gtk'
 pkgname=webkit2gtk
-version=2.24.2
-revision=1
+version=2.24.3
+revision=2
 wrksrc="webkitgtk-${version}"
 build_style=cmake
 build_helper="gir"
@@ -27,29 +27,24 @@ maintainer="Enno Boland <gottox@voidlinux.org>"
 license="LGPL-2.1-or-later, BSD-2-Clause"
 homepage="https://webkitgtk.org/"
 distfiles="${homepage}/releases/webkitgtk-${version}.tar.xz"
-checksum=019cb1f0d05bf6148b72c7a85734bcd006388a1c14132843ef9a1b2cb7b4321c
+checksum=940d746d7e82c357222feb5b3f44c4b201e81df7d81ddca5ca2bf3ae0acf6c51
+
+makedepends+=" qt5-devel"
 
 # ETOOHUGE
 nodebug=1
 
-CXXFLAGS="-Wno-expansion-to-defined"
+CXXFLAGS="-Wno-expansion-to-defined -Wno-redundant-move -Wno-deprecated-copy"
 
 # Package build options
 build_options="gir wayland x11 jit sampling_profiler"
-build_options_default="wayland x11"
-
-case "$XBPS_TARGET_MACHINE" in
-	arm*-musl) # cross building hangs for hours in g-ir-scanner-qemuwrapper
-		broken="cross compiling from x86_64 to arm*-musl stalls the builders"
-		;;
-	*) build_options_default+=" gir"
-esac
+build_options_default="gir wayland x11"
 
 desc_option_jit="Enable JustInTime JS support"
 desc_option_sampling_profiler="Toggle sampling profiler support (disabled on musl)"
 
 case "$XBPS_TARGET_MACHINE" in
-	aarch64*|arm*) configure_args+=" -DUSE_LD_GOLD=0";;
+	aarch64*|arm*|ppc|ppc-musl) configure_args+=" -DUSE_LD_GOLD=0";;
 esac
 
 # JIT conflicts with sampling_profiler
@@ -61,7 +56,7 @@ esac
 
 pre_configure() {
 	case "$XBPS_TARGET_MACHINE" in
-	armv[56]*) # Add -latomic to the targets
+	armv[56]*|ppc|ppc-musl) # Add -latomic to the targets
 		find -name "CMakeLists.txt" -exec sed -i "{}" \
 		-e "/target_link_libraries/s/)/ atomic)/" \;
 		;;

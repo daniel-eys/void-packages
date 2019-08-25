@@ -1,6 +1,6 @@
 # Template file for 'libGL'
 pkgname=libGL
-version=19.0.6
+version=19.1.4
 revision=1
 wrksrc="mesa-${version}"
 build_style=meson
@@ -16,12 +16,12 @@ makedepends="elfutils-devel expat-devel libXdamage-devel libXvMC-devel
  libvdpau-devel libxshmfence-devel ncurses-devel talloc-devel zlib-devel
  wayland-devel wayland-protocols llvm libsensors-devel libXrandr-devel"
 short_desc="Graphics library similar to SGI's OpenGL"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Orphaned <orphan@voidlinux.org>"
 license="MIT, LGPL-2.1-or-later"
 homepage="https://www.mesa3d.org/"
 changelog="https://www.mesa3d.org/relnotes/${version}.html"
 distfiles="https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
-checksum=2db2f2fcaa4048b16e066fad76b8a93944f7d06d329972b0f5fd5ce692ce3d24
+checksum=a6d268a7d9edcfd92b6da80f2e34e6e0a7baaa442efbeba2fc66c404943c6bfb
 
 # Set subpackages manually to set proper rdeps in 32bit pkgs.
 subpackages="libglapi libgbm libEGL libGLES libOSMesa"
@@ -96,6 +96,13 @@ post_install() {
 	vlicense docs/license.html
 	vmkdir usr/lib/xorg/modules/extensions
 	ln -s libglx-xorg.so ${DESTDIR}/usr/lib/xorg/modules/extensions/libglx.so
+	case "$XBPS_TARGET_MACHINE" in
+		i686*)
+			vsed -e 's#/usr/lib/#/usr/lib32/#g' \
+				-i ${DESTDIR}/usr/share/vulkan/icd.d/radeon_icd.i686.json \
+				-i ${DESTDIR}/usr/share/vulkan/icd.d/intel_icd.i686.json
+			;;
+	esac
 }
 
 libglapi_package() {
@@ -159,6 +166,7 @@ libxatracker_package() {
 
 mesa-ati-dri_package() {
 	short_desc="Mesa DRI drivers for ATI GPUs"
+	lib32files="/usr/share/vulkan/icd.d/radeon_icd.i686.json"
 	pkg_install() {
 		vmove "usr/lib/libXvMCr[36]00.so.*"
 		vmove "usr/lib/vdpau/libvdpau_r[36]00.so*"
@@ -180,6 +188,7 @@ mesa-ati-dri_package() {
 
 mesa-intel-dri_package() {
 	short_desc="Mesa DRI drivers for Intel GPUs"
+	lib32files="/usr/share/vulkan/icd.d/intel_icd.i686.json"
 	pkg_install() {
 		vmove "usr/lib/xorg/modules/drivers/i9[16]5_dri.*"
 		vmove "usr/share/vulkan/icd.d/intel_icd*.json"

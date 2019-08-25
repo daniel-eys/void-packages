@@ -1,6 +1,6 @@
 # Template file for 'kpty'
 pkgname=kpty
-version=5.59.0
+version=5.61.0
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
@@ -11,7 +11,7 @@ maintainer="John <johnz@posteo.net>"
 license="LGPL-2.0-or-later, LGPL-2.1-or-later"
 homepage="https://projects.kde.org/projects/frameworks/kpty"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
-checksum=7f7651ee1456aab9d6710bbb965dfe32396210caded900ce51c125843c940a65
+checksum=b91a88c00d3387927d1f6886a04e6e5bcc615ee1d0e72f647d51320ebf73471c
 
 kpty-devel_package() {
 	short_desc+=" - development"

@@ -1,10 +1,10 @@
 # Template file for 'netpbm'
 pkgname=netpbm
 # from http://svn.code.sf.net/p/netpbm/code/advanced/doc/HISTORY
-version=10.86.03
+version=10.87.01
 revision=1
-_githash=7a5291a126732a4ca220a79cfe5e6763e71ace73
-_githash_guide=97efa5ff63bc672cc6595ec4ada5a70e0b3edadc
+_githash=b4f838a9bfbb656c7d24bcf1e39c616a0804f837
+_githash_guide=659088e47395511bee20a5ac319bc6a3ea5d64cb
 create_wrksrc=yes
 build_wrksrc="netpbm-mirror-${_githash}"
 hostmakedepends="pkg-config perl python flex"
@@ -16,8 +16,8 @@ license="BSD,GPL-2,custom"
 homepage="http://netpbm.sourceforge.net/"
 distfiles="https://github.com/leahneukirchen/netpbm-mirror/archive/${_githash}.tar.gz
  https://github.com/leahneukirchen/netpbm-mirror/archive/${_githash_guide}.tar.gz"
-checksum="8803d0a9d9f70f3c0266564cedbefa9c5fdccaf1a7949425b8bee1e86da3d152
- 0cd2e34b79f98009a1779425b403bc185b5827394d2962eca03a26431a72652a"
+checksum="ffb52fd44bf4b0da505c5db45a8f63c856a25d8660fe45384a35e74fa1a16712
+ de7e6e3f66e561cad34afb087f50b28b7fbc585687f21306de3f81d42f6f4470"
 
 post_extract() {
 	cd $build_wrksrc
@@ -37,6 +37,7 @@ do_configure() {
 	fi
 	sed -i 's|misc|share/netpbm|' common.mk
 	sed -i 's|/link|/lib|' lib/Makefile
+	sed -i 's|/sharedlink|/lib|' lib/Makefile
 	sed -i 's|install.manwebmain install.manweb install.man|install.man|' GNUmakefile
 	if [ "$CROSS_BUILD" ]; then
 		# Patch buildutils/endiangen.c to return the endianess
@@ -93,6 +94,6 @@ libnetpbm-devel_package() {
 	short_desc+=" - development files"
 	pkg_install() {
 		vmove usr/include
-		#vmove usr/lib/*.so
+		vmove usr/lib/*.so
 	}
 }

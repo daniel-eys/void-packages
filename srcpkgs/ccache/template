@@ -1,19 +1,19 @@
 # Template file for 'ccache'
 pkgname=ccache
-version=3.7.1
-revision=2
+version=3.7.3
+revision=1
 bootstrap=yes
 build_style=gnu-configure
 make_check_args="CC=gcc"
 makedepends="zlib-devel"
 checkdepends="perl"
 short_desc="Fast C/C++ Compiler Cache"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Enno Boland <gottox@voidlinux.org>"
 license="GPL-3.0-or-later"
 homepage="https://ccache.samba.org/"
 changelog="https://ccache.samba.org/news.html"
 distfiles="https://github.com/ccache/ccache/releases/download/v${version}/${pkgname}-${version}.tar.xz"
-checksum=66fc121a2a33968f9ec428e02f48ff4b8896fbabb759e9c09352267014dcbe65
+checksum=73d2ec69fcf4fd3b956304036974a779b443d88882b69c5d81b62b5dc8630e04
 
 post_install() {
 	vmkdir usr/lib/ccache/bin

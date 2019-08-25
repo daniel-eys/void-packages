@@ -1,15 +1,15 @@
 # Template file for 'linux4.9'
 pkgname=linux4.9
-version=4.9.181
+version=4.9.189
 revision=1
 patch_args="-Np1"
 wrksrc="linux-${version}"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Orphaned <orphan@voidlinux.org>"
 homepage="https://www.kernel.org"
 license="GPL-2.0-only"
 short_desc="Linux kernel and modules (${version%.*} series)"
 distfiles="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-${version}.tar.xz"
-checksum=8fcd223e11cba322801bc38cdb8b581d64c0115f585dcb6604de8561b574fced
+checksum=93d945661246f726b694455c80c140717d2beff5a718445a51183439bbe5d0b3
 
 nodebug=yes  # -dbg package is generated below manually
 nostrip=yes

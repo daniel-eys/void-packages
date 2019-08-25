@@ -1,6 +1,6 @@
 # Template file for 'bdf2psf'
 pkgname=bdf2psf
-version=1.191
+version=1.193
 revision=1
 archs=noarch
 wrksrc="console-setup-${version}"
@@ -10,7 +10,7 @@ maintainer="Leah Neukirchen <leah@vuxu.org>"
 license="GPL-2.0-or-later"
 homepage="https://packages.debian.org/sid/bdf2psf"
 distfiles="${DEBIAN_SITE}/main/c/console-setup/console-setup_${version}.tar.xz"
-checksum=93eca88947feeca0631cf19fe9e67e9ce9ecc24d6b0c30f2ae6d2dfd95cfd842
+checksum=d29c5d49cf4e0d8c1149bacbac38d9400d16f25a9fe3b8ad121737b0cc828977
 
 post_extract() {
 	sed -i '44s/if (/if (\$\#ARGV \< 0 \|\| /' Fonts/bdf2psf

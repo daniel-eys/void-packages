@@ -1,6 +1,6 @@
 # Template file for 'glib'
 pkgname=glib
-version=2.60.2
+version=2.60.6
 revision=1
 build_style=meson
 configure_args="-Dfam=false -Dman=true -Dselinux=disabled
@@ -9,12 +9,12 @@ hostmakedepends="pkg-config libxslt docbook-xsl $(vopt_if gtk_doc gtk-doc)"
 makedepends="zlib-devel pcre-devel libffi-devel dbus-devel elfutils-devel libmount-devel"
 checkdepends="desktop-file-utils shared-mime-info tzdata"
 short_desc="GNU library of C routines"
-maintainer="Rasmus Thomsen <oss@cogitri.dev>"
+maintainer="Enno Boland <gottox@voidlinux.org>"
 license="LGPL-2.1-or-later"
 homepage="https://wiki.gnome.org/Projects/GLib"
 changelog="https://gitlab.gnome.org/GNOME/glib/raw/master/NEWS"
 distfiles="${GNOME_SITE}/glib/${version%.*}/glib-${version}.tar.xz"
-checksum=2ef15475060addfda0443a7e8a52b28a10d5e981e82c083034061daf9a8f80d9
+checksum=ff8fab8d8deaa4fd0536c90f90d9769a09071779c7e6183907f6855645bffb6c
 
 build_options="gtk_doc"
 

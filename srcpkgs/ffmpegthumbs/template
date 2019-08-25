@@ -1,6 +1,6 @@
 # Template file for 'ffmpegthumbs'
 pkgname=ffmpegthumbs
-version=19.04.2
+version=19.08.0
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
@@ -12,4 +12,4 @@ maintainer="Michael Straube <straubem@gmx.de>"
 license="GPL-2.0-or-later"
 homepage="${KDE_SITE}/applications"
 distfiles="${KDE_SITE}/applications/${version}/src/ffmpegthumbs-${version}.tar.xz"
-checksum=bd07f3f66a30de0cd942e0c3ffc4688183217d529790587d01ac9794217eb165
+checksum=13f5f8b40c0f6146cdd4d1d9e6a7b7dd19cda9650fe08f9731c050e58f11efee

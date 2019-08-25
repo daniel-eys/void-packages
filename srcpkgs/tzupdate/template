@@ -1,6 +1,6 @@
 # Template file for 'tzupdate'
 pkgname=tzupdate
-version=1.3.1
+version=1.5.0
 revision=1
 archs=noarch
 build_style=python3-module
@@ -12,4 +12,4 @@ maintainer="Diogo Leal <diogo@diogoleal.com>"
 license="Public domain"
 homepage="https://github.com/cdown/tzupdate"
 distfiles="https://github.com/cdown/tzupdate/archive/${version}.tar.gz"
-checksum=939f1cd352a08b0401ceb0bd6b0f8fe56a033c0ad7bac06966c2dc14bbf589e0
+checksum=b11f14112335eb472203410f087406eb8107c75b3ef474bab2486122e5852c28

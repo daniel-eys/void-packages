@@ -1,10 +1,9 @@
 # Template file for 'libinput'
 pkgname=libinput
-version=1.13.2
+version=1.14.0
 revision=1
 build_style=meson
-configure_args="-Ddebug-gui=false -Ddocumentation=false
- -Dtests=false"
+configure_args="-Ddebug-gui=false -Ddocumentation=false -Dtests=false"
 hostmakedepends="pkg-config"
 makedepends="libevdev-devel libwacom-devel mtdev-devel eudev-libudev-devel"
 checkdepends="valgrind check-devel"
@@ -13,7 +12,7 @@ maintainer="maxice8 <thinkabit.ukim@gmail.com>"
 license="MIT"
 homepage="https://www.freedesktop.org/wiki/Software/libinput"
 distfiles="${FREEDESKTOP_SITE}/${pkgname}/${pkgname}-${version}.tar.xz"
-checksum=1d9fa0698348dea46f75321d98788f8ac7181c069b70c4d10736910a12bb6a6d
+checksum=7cb85c24f8920b81bc5360220107e267ab4e0e718704c7690a8c7b03fa14fc67
 
 if [ "$XBPS_CHECK_PKGS" ]; then
 	configure_args+=" -Dtests=true"

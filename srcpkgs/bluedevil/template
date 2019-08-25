@@ -1,6 +1,6 @@
 # Template file for 'bluedevil'
 pkgname=bluedevil
-version=5.15.5
+version=5.16.4
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
@@ -11,7 +11,7 @@ maintainer="John <johnz@posteo.net>"
 license="GPL-2.0-or-later, LGPL-2.1-or-later"
 homepage="https://projects.kde.org/projects/plasma/bluedevil"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
-checksum=7379230de96c5e6d4ea40f4dfa8732e20a6ee3bd291e6f119ccb57646c33fe1f
+checksum=36eaff3da49104fb4ca8de32c2cd42657af7cde94f54c95bacf5abd6c1d39521
 
 if [ "$CROSS_BUILD" ]; then
 	hostmakedepends+=" kpackage-devel kconfig-devel kcoreaddons-devel"

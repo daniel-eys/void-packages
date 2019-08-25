@@ -1,6 +1,6 @@
 # Template file for 'linux5.1'
 pkgname=linux5.1
-version=5.1.9
+version=5.1.21
 revision=1
 wrksrc="linux-${version}"
 short_desc="Linux kernel and modules (${version%.*} series)"
@@ -8,7 +8,7 @@ maintainer="Helmut Pozimski <helmut@pozimski.eu>"
 license="GPL-2.0-only"
 homepage="https://www.kernel.org"
 distfiles="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${version}.tar.xz"
-checksum=58c9eca99c3dd2fff5b559302996c985c3f3f2aad0b99b2172a61c4df7122a79
+checksum=56495f82314f0dfb84a3fe7fad78e17be69c4fd36ef46f2452458b2fa1e341f6
 patch_args="-Np1"
 
 nodebug=yes  # -dbg package is generated below manually
@@ -42,7 +42,7 @@ do_configure() {
 
 	# If there's a file called <arch>-dotconfig, use it to
 	# configure the kernel; otherwise use arch defaults and all stuff
-	# as modules (defconfig+allmodconfig).
+	# as modules (allmodconfig).
 	local arch subarch _args
 
 	case "$XBPS_TARGET_MACHINE" in
@@ -72,8 +72,7 @@ do_configure() {
 		cp -f ${FILESDIR}/${XBPS_TARGET_MACHINE%%-musl}-dotconfig .config
 		make ${makejobs} ARCH=$arch ${_args} oldconfig
 	else
-		msg_normal "Defaulting to 'defconfig and allmodconfig'.\n"
-		make ${makejobs} ARCH=$arch ${_args} defconfig
+		msg_normal "Defaulting to 'allmodconfig'.\n"
 		make ${makejobs} ARCH=$arch ${_args} allmodconfig
 	fi
 	# Always use our revision to CONFIG_LOCALVERSION to match our pkg version.
@@ -286,8 +285,8 @@ do_install() {
 	mkdir -p ${hdrdest}/arch/x86/ras
 	cp -a arch/x86/ras/Kconfig ${hdrdest}/arch/x86/ras/Kconfig
 
-	# Extract debugging symbols
-	msg_normal "$pkgver: extracting debug info, please wait...\n"
+	# Extract debugging symbols and compress modules
+	msg_normal "$pkgver: extracting debug info and compressing modules, please wait...\n"
 	install -Dm644 vmlinux ${DESTDIR}/usr/lib/debug/boot/vmlinux-${_kernver}
 	(
 	cd ${DESTDIR}

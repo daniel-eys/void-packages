@@ -1,6 +1,6 @@
 # Template file for 'txr'
 pkgname=txr
-version=217
+version=223
 revision=1
 build_style=configure
 make_check_target=tests
@@ -10,7 +10,7 @@ maintainer="Oliver Kiddle <okiddle@yahoo.co.uk>"
 license="BSD-2-Clause"
 homepage="http://www.nongnu.org/txr/"
 distfiles="http://www.kylheku.com/cgit/txr/snapshot/${pkgname}-${version}.tar.bz2"
-checksum=98b43c333bd85a291c294a6d761343cf62f481b48da9a97be0fb53b7f43f9b60
+checksum=9bb9100c11ea958b42ed6c5e8b4c9cb95dc758a9b7a1d2e750eb3ddc22c20904
 
 if [ "$CROSS_BUILD" ]; then
 	hostmakedepends+=" txr"

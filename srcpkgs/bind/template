@@ -1,8 +1,8 @@
 # Template file for 'bind'
 pkgname=bind
 reverts="9.13.6_1"
-version=9.11.7
-revision=2
+version=9.11.9
+revision=1
 _fullver="${version}${_patchver:+-${_patchver}}"
 wrksrc="${pkgname}-${_fullver}"
 build_style=gnu-configure
@@ -17,11 +17,11 @@ hostmakedepends="automake libtool perl"
 makedepends="libressl-devel libxml2-devel libcap-devel readline-devel libatomic-devel
  libidn2-devel $(vopt_if geoip geoip-devel) $(vopt_if seccomp libseccomp-devel)"
 short_desc="Berkeley Internet Name Domain server"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Orphaned <orphan@voidlinux.org>"
 license="ISC"
 homepage="https://www.isc.org/downloads/bind/"
 distfiles="https://ftp.isc.org/isc/bind9/${_fullver}/bind-${_fullver}.tar.gz"
-checksum=5b9e86dc5711a1a7448356c02ddb23bb1dd78c9e02a69f9b2e2ce31d39f5a0fd
+checksum=963bf048354795b85b8f3dbe3ff5ba524d3f5b14b86a4cc733fcf971b43ac50e
 
 conf_files="/etc/named/named.conf"
 system_accounts="named"

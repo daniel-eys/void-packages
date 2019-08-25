@@ -365,11 +365,23 @@ in this directory such as `${XBPS_BUILDDIR}/${wrksrc}`.
 
 - `XBPS_MACHINE` The machine architecture as returned by `xbps-uhelper arch`.
 
+- `XBPS_ENDIAN` The machine's endianness ("le" or "be").
+
+- `XBPS_LIBC` The machine's C library ("glibc" or "musl").
+
+- `XBPS_WORDSIZE` The machine's word size in bits (32 or 64).
+
 - `XBPS_SRCDISTDIR` Full path to where the `source distfiles` are stored, i.e `$XBPS_HOSTDIR/sources`.
 
 - `XBPS_SRCPKGDIR` Full path to the `srcpkgs` directory.
 
 - `XBPS_TARGET_MACHINE` The target machine architecture when cross compiling a package.
+
+- `XBPS_TARGET_ENDIAN` The target machine's endianness ("le" or "be").
+
+- `XBPS_TARGET_LIBC` The target machine's C library ("glibc" or "musl").
+
+- `XBPS_TARGET_WORDSIZE` The target machine's word size in bits (32 or 64).
 
 - `XBPS_FETCH_CMD` The utility to fetch files from `ftp`, `http` of `https` servers.
 
@@ -460,7 +472,7 @@ Example:
   | DEBIAN_SITE      | http://ftp.debian.org/debian/pool               |
   | FREEDESKTOP_SITE | http://freedesktop.org/software                 |
   | GNOME_SITE       | http://ftp.gnome.org/pub/GNOME/sources          |
-  | GNU_SITE         | http://mirrors.kernel.org/gnu                   |
+  | GNU_SITE         | http://ftp.gnu.org/gnu                          |
   | KERNEL_SITE      | http://www.kernel.org/pub/linux                 |
   | MOZILLA_SITE     | http://ftp.mozilla.org/pub                      |
   | NONGNU_SITE      | http://download.savannah.nongnu.org/releases    |
@@ -468,7 +480,7 @@ Example:
   | SOURCEFORGE_SITE | http://downloads.sourceforge.net/sourceforge    |
   | UBUNTU_SITE      | http://archive.ubuntu.com/ubuntu/pool           |
   | XORG_HOME        | http://xorg.freedesktop.org/wiki/               |
-  | XORG_SITE        | http://xorg.freedesktop.org/releases/individual |
+  | XORG_SITE        | http://www.x.org/releases/individual            |
   | KDE_SITE         | https://download.kde.org/stable                 |
 
 - `checksum` The `sha256` digests matching `${distfiles}`. Multiple files can be
@@ -1460,7 +1472,7 @@ Go packages should be built with the `go` build style, if possible.
 The `go` build style takes care of downloading Go dependencies and
 setting up cross compilation.
 
-The following variables influence how Go packages are built:
+The following template variables influence how Go packages are built:
 
 - `go_import_path`: The import path of the package included in the
   distfile, as it would be used with `go get`. For example, GitHub's
@@ -1478,6 +1490,11 @@ The following variables influence how Go packages are built:
   any go.mod files, `default` to use Go's default behavior, or anything
   accepted by `go build -mod MODE`.  Defaults to `vendor` if there's
   a vendor directory, otherwise `default`.
+
+The following environment variables influence how Go packages are built:
+
+- `XBPS_MAKEJOBS`: Value passed to the `-p` flag of `go install`, to
+  control the parallelism of the Go compiler.
 
 Occasionally it is necessary to perform operations from within the Go
 source tree.  This is usually needed by programs using go-bindata or

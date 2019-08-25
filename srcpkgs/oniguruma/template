@@ -1,15 +1,15 @@
 # Template file for 'oniguruma'
 pkgname=oniguruma
-version=6.9.1
+version=6.9.3
 revision=1
 wrksrc="onig-${version}"
 build_style=gnu-configure
-short_desc="A multi-charset regular expressions library"
+short_desc="Multi-charset regular expressions library"
 maintainer="John Regan <john@jrjrtech.com>"
 license="BSD-2-Clause"
 homepage="https://github.com/kkos/oniguruma"
 distfiles="https://github.com/kkos/oniguruma/releases/download/v${version}/onig-${version}.tar.gz"
-checksum=c7c3feb7be45a5cc9f2dec239b4a317a422e6ffea299cf91ffab1b926633ea12
+checksum=ab5992a76b7ab2185b55f3aacc1b0df81132c947b3d594f82eb0b41cf219725f
 
 post_install() {
 	vlicense COPYING

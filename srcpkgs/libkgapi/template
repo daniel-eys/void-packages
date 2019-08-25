@@ -1,6 +1,6 @@
 # Template file for 'libkgapi'
 pkgname=libkgapi
-version=19.04.2
+version=19.08.0
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules qt5-host-tools qt5-qmake python3
@@ -12,7 +12,12 @@ maintainer="John <johnz@posteo.net>"
 license="LGPL-2.1-or-later"
 homepage="https://projects.kde.org/projects/extragear/libs/libkgapi"
 distfiles="${KDE_SITE}/applications/${version}/src/${pkgname}-${version}.tar.xz"
-checksum=a9eda4c03ba76653c7b035a532dc53c7042153f18f55bec0166aca258d73217a
+checksum=bc8a54e0997f4e3e0e840e350c6a9dee26582028415c5e9863d53a3280faa9f6
+
+case "$XBPS_TARGET_MACHINE" in
+	arm*) broken="depends on qt5-webengine";;
+esac
+
 
 libkgapi-devel_package() {
 	short_desc+=" - development files"

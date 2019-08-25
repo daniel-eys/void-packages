@@ -1,16 +1,16 @@
 # Template file for 'eudev'
 
-_UDEV_VERSION="220" # compatible udev version provided
+_UDEV_VERSION="228" # compatible udev version provided
 
 pkgname=eudev
 version=3.2.8
-revision=1
+revision=2
 build_style=gnu-configure
 configure_args="--enable-hwdb --enable-manpages --disable-introspection"
 hostmakedepends="automake libtool pkg-config gperf libxslt docbook-xsl"
 makedepends="libblkid-devel libkmod-devel"
 short_desc="Gentoo's fork of systemd-udev (enhanced userland device daemon)"
-maintainer="Juan RP <xtraeme@voidlinux.org>"
+maintainer="Enno Boland <gottox@voidlinux.org>"
 license="GPL-2.0-or-later"
 homepage="https://github.com/gentoo/eudev"
 distfiles="https://github.com/gentoo/eudev/archive/v${version}.tar.gz"
