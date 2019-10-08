@@ -1,0 +1,18 @@
+# Template file for 'starship'
+pkgname=starship
+version=0.19.0
+revision=1
+build_style=cargo
+build_helper="rust"
+hostmakedepends="pkg-config"
+makedepends="libgit2-devel"
+short_desc="Minimal, fast and customizable cross-shell prompt"
+maintainer="Aluísio Augusto Silva Gonçalves <aluisio@aasg.name>"
+license="ISC"
+homepage="https://starship.rs"
+distfiles="https://github.com/starship/starship/archive/v${version}.tar.gz"
+checksum=552836c455925be7443bbd43e77093785f0b7db7cc2cff0907e7746c3d56dab2
+
+post_install() {
+	vlicense LICENSE
+}

@@ -1,6 +1,6 @@
 # Template file for 'erlang'
 pkgname=erlang
-version=22.0.7
+version=22.1.1
 revision=1
 create_wrksrc=yes
 build_wrksrc="otp-OTP-${version}"
@@ -15,7 +15,7 @@ maintainer="Leah Neukirchen <leah@vuxu.org>"
 license="Apache-2.0"
 homepage="http://www.erlang.org/"
 distfiles="https://github.com/erlang/otp/archive/OTP-${version}.tar.gz"
-checksum=04c090b55ec4a01778e7e1a5b7fdf54012548ca72737965b7aa8c4d7878c92bc
+checksum=9e7e8565a324101ea31fe5f59b8e46f7dabe9b75df9614d24c3abd05885f1773
 
 build_options="x11"
 

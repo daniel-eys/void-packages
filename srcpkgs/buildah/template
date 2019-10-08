@@ -1,6 +1,6 @@
 # Template file for 'buildah'
 pkgname=buildah
-version=1.10.1
+version=1.11.2
 revision=1
 build_style=go
 go_import_path=github.com/containers/buildah
@@ -15,7 +15,7 @@ maintainer="Cameron Nemo <cnemo@tutanota.com>"
 license="Apache-2.0"
 homepage="https://github.com/containers/buildah"
 distfiles="${homepage}/archive/v${version}.tar.gz"
-checksum=02dc74649a2341d355281911ee5a8e4801165192e4419627513698ab129c9e78
+checksum=3edfdebaffba8df9d157c6fba3a53916279964a48e294bb774f4535de0fbd427
 
 post_build() {
 	make -C docs GOMD2MAN=go-md2man

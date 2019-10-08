@@ -1,6 +1,6 @@
 # Template file for 'kubecfg'
 pkgname=kubecfg
-version=0.12.4
+version=0.13.0
 revision=1
 build_style=go
 go_import_path="github.com/bitnami/kubecfg"
@@ -10,4 +10,4 @@ maintainer="Leah Neukirchen <leah@vuxu.org>"
 license="Apache-2.0"
 homepage="https://github.com/bitnami/kubecfg"
 distfiles="https://github.com/bitnami/kubecfg/archive/v${version}.tar.gz"
-checksum=0d38cecc0e1737d2d27c0ce31e1d36b3c5cdc19f4c2ab77d254229ab9685d915
+checksum=c971175bbb83bb39b0f35f0359103c43471c3b42c903990f52ea34fcb53dfccf
