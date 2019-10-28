@@ -1,6 +1,6 @@
 # Template file for 'powerdevil'
 pkgname=powerdevil
-version=5.16.5
+version=5.17.1
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
@@ -13,4 +13,4 @@ maintainer="John <johnz@posteo.net>"
 license="GPL-2.0-or-later"
 homepage="https://projects.kde.org/projects/plasma/powerdevil"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
-checksum=ac868f31df8c6bcc6b1c850efa0640695ba698caabefcb21fc0b0c3405712139
+checksum=8939331967e4df70aadf3d411deec3ab1ea0c820192fd893a72d8590ce98b3d7

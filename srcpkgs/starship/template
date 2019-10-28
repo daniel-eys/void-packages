@@ -1,6 +1,6 @@
 # Template file for 'starship'
 pkgname=starship
-version=0.19.0
+version=0.25.1
 revision=1
 build_style=cargo
 build_helper="rust"
@@ -11,7 +11,7 @@ maintainer="Aluísio Augusto Silva Gonçalves <aluisio@aasg.name>"
 license="ISC"
 homepage="https://starship.rs"
 distfiles="https://github.com/starship/starship/archive/v${version}.tar.gz"
-checksum=552836c455925be7443bbd43e77093785f0b7db7cc2cff0907e7746c3d56dab2
+checksum=eb560643045c7e273525db414f2936289cf9bebdc6db0615018db77d8e6e10d0
 
 post_install() {
 	vlicense LICENSE

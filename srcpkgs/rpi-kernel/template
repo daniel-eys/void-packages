@@ -5,19 +5,19 @@
 #
 #   https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=224931
 
-_githash="6d8bf28fa4b1ca0a35c0cd1dcb267fb216daf720"
+_githash="3492a1b003494535eb1b17aa7f258469036b1de7"
 _gitshort="${_githash:0:7}"
 
 pkgname=rpi-kernel
-version=4.19.75
-revision=2
+version=4.19.80
+revision=1
 wrksrc="linux-${_githash}"
 maintainer="Peter Bui <pbui@github.bx612.space>"
 homepage="http://www.kernel.org"
 license="GPL-2.0-only"
 short_desc="The Linux kernel for Raspberry Pi (${version%.*} series [git ${_gitshort}])"
 distfiles="https://github.com/raspberrypi/linux/archive/${_githash}.tar.gz"
-checksum=ccab02fd16a9450637c8f715f8037c02cd21a086c914d88b819e4b153cde873d
+checksum=41c64cab0192843512df8c6663f4021e594c29ff4c8087e9008a39170b25a4e3
 
 _kernver="${version}_${revision}"
 
@@ -80,6 +80,14 @@ do_configure() {
 	echo "CONFIG_PROC_EVENTS=y" >> "$defconfig"
 	echo "CONFIG_F2FS_FS_SECURITY=y" >> "$defconfig"
 	echo "CONFIG_CGROUP_PIDS=y" >> "$defconfig"
+	
+	# IR Remote Support
+	echo "CONFIG_RC_CORE=y" >> "$defconfig"
+	echo "CONFIG_LIRC=y" >> "$defconfig"
+	echo "CONFIG_RC_DECODERS=y" >> "$defconfig"
+	echo "CONFIG_RC_DEVICES=y" >> "$defconfig"
+	echo "CONFIG_IR_RC6_DECODER=m" >> "$defconfig"
+	echo "CONFIG_IR_MCEUSB=m" >> "$defconfig"
 
 	make ${makejobs} ${_cross} ARCH=${_arch} ${target}
 

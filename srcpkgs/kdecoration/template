@@ -1,6 +1,6 @@
 # Template file for 'kdecoration'
 pkgname=kdecoration
-version=5.16.5
+version=5.17.1
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
@@ -11,7 +11,7 @@ maintainer="John <johnz@posteo.net>"
 license="LGPL-2.1-or-later"
 homepage="https://projects.kde.org/projects/plasma/kdecoration"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
-checksum=2b8c7b7cf114d0eff4ec842009cda264d8cf1254ec4bf65868b6d26f263829bb
+checksum=4f8f7d851b19e141e91eadb4ddbf2fef2d6496839a929349a1568d618bb0be39
 
 kdecoration-devel_package() {
 	short_desc+=" - development"

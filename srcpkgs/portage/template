@@ -1,6 +1,6 @@
 # Template file for 'portage'
 pkgname=portage
-version=2.3.75
+version=2.3.78
 revision=1
 wrksrc="${pkgname}-${pkgname}-${version}"
 build_style=python3-module
@@ -13,7 +13,7 @@ maintainer="teldra <teldra@rotce.de>"
 license="GPL-2.0-only"
 homepage="https://wiki.gentoo.org/wiki/Portage"
 distfiles="https://github.com/gentoo/${pkgname}/archive/${pkgname}-${version}.tar.gz"
-checksum=1cf3651965250a44927c666ac4d1a8b2d86d806493c3139e457973624471e009
+checksum=1fcec07c88d0c7ff187d3e41f697b38fba4a553b650482d0c735f78b4eee4430
 
 conf_files="
 	/etc/dispatch-conf.conf

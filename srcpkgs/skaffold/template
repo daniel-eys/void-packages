@@ -1,6 +1,6 @@
 # Template file for 'skaffold'
 pkgname=skaffold
-version=0.39.0
+version=0.41.0
 revision=1
 build_style=go
 go_import_path=github.com/GoogleContainerTools/skaffold
@@ -12,4 +12,4 @@ license="GPL-3.0-or-later"
 homepage="https://skaffold.dev/"
 changelog="https://github.com/GoogleContainerTools/skaffold/releases"
 distfiles="https://github.com/GoogleContainerTools/skaffold/archive/v${version}.tar.gz"
-checksum=266ee5bc39d5c54e90a7b7667fd57790b2657b48f25a821a43cf66f2554743fd
+checksum=4f6db2b9fb1a56cc2e8105f19f04e0db7912f3ce514c2526d511903391071e43
