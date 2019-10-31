@@ -1,6 +1,6 @@
 # Template file for 'dnscrypt-proxy'
 pkgname=dnscrypt-proxy
-version=2.0.30
+version=2.0.31
 revision=1
 build_style=go
 go_import_path=github.com/jedisct1/dnscrypt-proxy
@@ -11,7 +11,7 @@ license="ISC"
 homepage="https://github.com/jedisct1/dnscrypt-proxy"
 changelog="https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/ChangeLog"
 distfiles="https://github.com/jedisct1/dnscrypt-proxy/archive/${version}.tar.gz"
-checksum=f61daf201d80b730dd36f4c7f1888b8ca5776572f7a779d9a306e8c590e388c0
+checksum=b5d17ae56856e5797b59d862bccb038ff891ac0bf159534e9a937b0f0cc35777
 conf_files="/etc/dnscrypt-proxy/*"
 system_accounts="dnscrypt_proxy"
 make_dirs="
