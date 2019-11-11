@@ -1,9 +1,9 @@
 # Template file for 'lollypop'
 pkgname=lollypop
-version=1.2.3
+version=1.2.7
 revision=1
 # Gitlab upload tag hash
-_uhash=24663baf49d563c97a2029703803f87c
+_uhash=08f973788c7ca46d9285eec2ac818edb
 archs=noarch
 build_style=meson
 pycompile_module="lollypop"
@@ -16,4 +16,4 @@ maintainer="Jürgen Buchmüller <pullmoll@t-online.de>"
 license="GPL-3.0-or-later"
 homepage="https://wiki.gnome.org/Apps/Lollypop"
 distfiles="https://gitlab.gnome.org/World/${pkgname}/uploads/${_uhash}/${pkgname}-${version}.tar.xz"
-checksum=1db9df017f3a3d74845dc565f94975b5dff56678cb7a6691334cfca554276ab5
+checksum=f29cea6ad6a43e76ef7882ca82b7992eec9c96bbff91b786a9200a1349357843
