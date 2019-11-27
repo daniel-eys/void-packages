@@ -6,6 +6,7 @@ build_style=configure
 configure_args="--disable-idn --gpgme --idn2 --lmdb --lua --notmuch --sasl --ssl"
 make_check_target=test
 conf_files="/etc/neomuttrc"
+# neomutt needs either w3m/lynx/elinks to build manual.html
 hostmakedepends="docbook-xsl libxslt tcl perl w3m"
 makedepends="aspell-devel gettext-devel gpgme-devel libidn2-devel libnotmuch-devel
  libressl-devel libsasl-devel lmdb-devel lua-devel"
