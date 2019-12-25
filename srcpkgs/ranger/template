@@ -1,16 +1,15 @@
 # Template file for 'ranger'
 pkgname=ranger
 version=1.9.2
-revision=2
+revision=3
 archs=noarch
 build_style=python3-module
-pycompile_module="ranger"
 hostmakedepends="python3"
 makedepends="python3-devel"
 depends="python3"
 checkdepends="python3-pytest flake8 ncurses-term"
 short_desc="File manager with an ncurses frontend written in Python"
-maintainer="Orphaned <orphan@voidlinux.org>"
+maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="GPL-3.0-only"
 homepage="https://ranger.github.io"
 distfiles="${homepage}/${pkgname}-${version}.tar.gz"
