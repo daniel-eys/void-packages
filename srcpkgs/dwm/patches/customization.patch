@@ -1,7 +1,7 @@
 From 2912c49efbca959182b15be73ef3dcc0422c6d47 Mon Sep 17 00:00:00 2001
 From: Daniel Eysser <daniel.eysser@gmail.com>
 Date: Sun, 2 Oct 2016 03:34:28 +0200
-Subject: [PATCH 1/9] import patch: bottomstack
+Subject: [PATCH 01/10] import patch: bottomstack
 
 ---
  .gitignore   |  2 ++
@@ -120,13 +120,13 @@ index 4465af1..1947f0a 100644
 +	}
 +}
 -- 
-2.21.0
+2.24.1
 
 
 From 8ce702c31ac3a92cf8529a03d8204b44c3b5dde5 Mon Sep 17 00:00:00 2001
 From: Daniel Eysser <daniel.eysser@gmail.com>
 Date: Sun, 2 Oct 2016 03:48:00 +0200
-Subject: [PATCH 2/9] import patch: movestack
+Subject: [PATCH 02/10] import patch: movestack
 
 ---
  config.def.h |  2 ++
@@ -212,13 +212,13 @@ index 1947f0a..d12e371 100644
 +	}
 +}
 -- 
-2.21.0
+2.24.1
 
 
 From 0abbbfe2b5dd11c930e2b409e37170d1e4f0408c Mon Sep 17 00:00:00 2001
 From: Daniel Eysser <daniel.eysser@gmail.com>
 Date: Sun, 2 Oct 2016 04:25:02 +0200
-Subject: [PATCH 3/9] import patch: attachaside
+Subject: [PATCH 03/10] import patch: attachaside
 
 ---
  dwm.c | 32 ++++++++++++++++++++++++++++----
@@ -317,13 +317,13 @@ index d12e371..642bbe5 100644
  				}
  				if (m == selmon)
 -- 
-2.21.0
+2.24.1
 
 
 From 571044f415ea6f36afc1e98d1efb0a8fdd96ffb8 Mon Sep 17 00:00:00 2001
 From: Daniel Eysser <daniel.eysser@gmail.com>
 Date: Sun, 2 Oct 2016 04:43:28 +0200
-Subject: [PATCH 4/9] import patch: fibonacci
+Subject: [PATCH 04/10] import patch: fibonacci
 
 ---
  config.def.h |  4 +++
@@ -438,13 +438,13 @@ index 642bbe5..a53b57d 100644
 +	fibonacci(mon, 0);
 +}
 -- 
-2.21.0
+2.24.1
 
 
 From e84776af9cfad91d5a02a2f25ceeac613097492b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Mon, 5 Dec 2016 01:27:27 +0100
-Subject: [PATCH 5/9] import patch: uselessgap
+Subject: [PATCH 05/10] import patch: uselessgap
 
 ---
  .gitignore   |  1 +
@@ -529,13 +529,13 @@ index a53b57d..472b358 100644
  	configure(c);
  	XSync(dpy, False);
 -- 
-2.21.0
+2.24.1
 
 
 From 382ad55862e81b2d055b4af678954e7cdb22b837 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Sun, 7 Oct 2018 02:06:14 +0200
-Subject: [PATCH 6/9] import patch: switchcol
+Subject: [PATCH 06/10] import patch: switchcol
 
 ---
  config.def.h |  1 +
@@ -603,13 +603,13 @@ index 472b358..d777e21 100644
  tag(const Arg *arg)
  {
 -- 
-2.21.0
+2.24.1
 
 
 From 7e6a1d7750b7ec43df667d49870b7c373628eaf1 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Mon, 4 Feb 2019 07:16:49 +0100
-Subject: [PATCH 7/9] import patch: pertag
+Subject: [PATCH 07/10] import patch: pertag
 
 ---
  dwm.c | 96 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
@@ -815,13 +815,13 @@ index d777e21..71d0ed3 100644
  	arrange(selmon);
  }
 -- 
-2.21.0
+2.24.1
 
 
 From 06412beb8deb2c3f2842dda50c6ac7d9a9bfa83d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Sun, 3 Mar 2019 19:52:19 +0100
-Subject: [PATCH 8/9] fix wmctrl focus
+Subject: [PATCH 08/10] fix wmctrl focus
 
 ---
  dwm.c | 5 +++--
@@ -844,13 +844,13 @@ index 71d0ed3..cedfc13 100644
  }
  
 -- 
-2.21.0
+2.24.1
 
 
 From b3430a34a517c9aba40d6041afe76bed8e4bfb4e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Sun, 3 Mar 2019 19:55:13 +0100
-Subject: [PATCH 9/9] use tabs
+Subject: [PATCH 09/10] use tabs
 
 ---
  config.def.h | 4 ++--
@@ -872,5 +872,50 @@ index 74ed29b..ac4f644 100644
  
  /* key definitions */
 -- 
-2.21.0
+2.24.1
+
+
+From ad441ddd4595701bd88d192fdd22d05262518621 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
+Date: Wed, 1 Jan 2020 16:13:23 +0100
+Subject: [PATCH 10/10] show statusbar on all monitors
+
+---
+ dwm.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git dwm.c dwm.c
+index cedfc13..0d3762a 100644
+--- dwm.c
++++ dwm.c
+@@ -761,11 +761,9 @@ drawbar(Monitor *m)
+ 	Client *c;
+ 
+ 	/* draw status first so it can be overdrawn by tags later */
+-	if (m == selmon) { /* status is only drawn on selected monitor */
+-		drw_setscheme(drw, scheme[SchemeNorm]);
+-		sw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+-		drw_text(drw, m->ww - sw, 0, sw, bh, 0, stext, 0);
+-	}
++	drw_setscheme(drw, scheme[SchemeNorm]);
++	sw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
++	drw_text(drw, m->ww - sw, 0, sw, bh, 0, stext, 0);
+ 
+ 	for (c = m->clients; c; c = c->next) {
+ 		occ |= c->tags;
+@@ -2132,9 +2130,11 @@ updatesizehints(Client *c)
+ void
+ updatestatus(void)
+ {
++	Monitor *m;
+ 	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
+ 		strcpy(stext, "dwm-"VERSION);
+-	drawbar(selmon);
++	for (m = mons; m; m = m->next)
++		drawbar(m);
+ }
+ 
+ void
+-- 
+2.24.1
 
