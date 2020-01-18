@@ -13,7 +13,7 @@ maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="GPL-3.0-only"
 homepage="https://ranger.github.io"
 distfiles="${homepage}/${pkgname}-${version}.tar.gz"
-checksum=0e1d1b1d3f78c227a6cfa783822e98591ca76a35c643d4814f40f73515d66b8a
+checksum=ce088a04c91c25263a9675dc5c43514b7ec1b38c8ea43d9a9d00923ff6cdd251
 
 do_check() {
 	# test_pylint is failing,

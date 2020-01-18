@@ -1,7 +1,7 @@
 # Template file for 'gallery-dl'
 pkgname=gallery-dl
-version=1.12.0
-revision=2
+version=1.12.2
+revision=1
 archs=noarch
 build_style=python3-module
 hostmakedepends="python3-setuptools"
@@ -12,7 +12,7 @@ license="GPL-2.0-or-later"
 homepage="https://github.com/mikf/gallery-dl"
 changelog="https://raw.githubusercontent.com/mikf/gallery-dl/master/CHANGELOG.md"
 distfiles="${homepage}/archive/v${version}.tar.gz"
-checksum=4038f76d0a244aa0208bb84cef07b8bb45768c334388250181acf123683cd3d7
+checksum=432dc3e290de0c45672b1e4753e70f70bc8aca3ebae8a3ae482af0226e908ba0
 
 post_build() {
 	make man completion
