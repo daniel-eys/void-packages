@@ -44,6 +44,7 @@ reconfigure_base_chroot() {
 }
 
 update_base_chroot() {
+    local keep_all_force=$1
     [ -z "$CHROOT_READY" ] && return
     msg_normal "xbps-src: updating software in $XBPS_MASTERDIR masterdir...\n"
     # no need to sync repodata, chroot_sync_repodata() does it for us.
@@ -53,7 +54,7 @@ update_base_chroot() {
     ${XBPS_INSTALL_CMD} ${XBPS_INSTALL_ARGS} -yu || msg_error "xbps-src: failed to update base-chroot!\n"
     msg_normal "xbps-src: cleaning up $XBPS_MASTERDIR masterdir...\n"
     [ -z "$XBPS_KEEP_ALL" -a -z "$XBPS_SKIP_DEPS" ] && remove_pkg_autodeps
-    [ -z "$XBPS_KEEP_ALL" ] && rm -rf $XBPS_MASTERDIR/builddir $XBPS_MASTERDIR/destdir
+    [ -z "$XBPS_KEEP_ALL" -a -z "$keep_all_force" ] && rm -rf $XBPS_MASTERDIR/builddir $XBPS_MASTERDIR/destdir
 }
 
 # FIXME: $XBPS_FFLAGS is not set when chroot_init() is run
@@ -127,7 +128,7 @@ chroot_prepare() {
     cp -f $XBPS_SRCPKGDIR/base-files/files/hosts $XBPS_MASTERDIR/etc
 
     mkdir -p $XBPS_MASTERDIR/etc/xbps.d
-    echo "syslog=false" >> $XBPS_MASTERDIR/etc/xbps.d/xbps.conf
+    echo "syslog=false" >> $XBPS_MASTERDIR/etc/xbps.d/00-xbps-src.conf
 
     # Prepare default locale: en_US.UTF-8.
     if [ -s ${XBPS_MASTERDIR}/etc/default/libc-locales ]; then
@@ -153,7 +154,7 @@ chroot_handler() {
     fi
 
     case "$action" in
-        fetch|extract|patch|configure|build|check|install|pkg|bootstrap-update|chroot)
+        fetch|extract|patch|configure|build|check|install|pkg|bootstrap-update|chroot|clean)
             chroot_prepare || return $?
             chroot_init || return $?
             ;;
@@ -191,7 +192,13 @@ chroot_sync_repodata() {
     crossconfdir=$XBPS_MASTERDIR/$XBPS_CROSS_BASE/etc/xbps.d
 
     [ -d $confdir ] && rm -rf $confdir
+    [ -d $crossconfdir ] && rm -rf $crossconfdir
 
+    if [ -d $XBPS_DISTDIR/etc/xbps.d/custom ]; then
+        mkdir -p $confdir $crossconfdir
+        cp -f $XBPS_DISTDIR/etc/xbps.d/custom/*.conf $confdir
+        cp -f $XBPS_DISTDIR/etc/xbps.d/custom/*.conf $crossconfdir
+    fi
     if [ "$CHROOT_READY" ]; then
         hostdir=/host
     else
@@ -296,7 +303,7 @@ chroot_sync_repodata() {
 
     # Make sure to sync index for remote repositories.
     msg_normal "xbps-src: updating repositories for host ($XBPS_MACHINE)...\n"
-    xbps-install -r $XBPS_MASTERDIR -S
+    $XBPS_INSTALL_CMD $XBPS_INSTALL_ARGS -S
 
     if [ -n "$XBPS_CROSS_BUILD" ]; then
         # Copy host keys to the target rootdir.
@@ -306,7 +313,7 @@ chroot_sync_repodata() {
         # Make sure to sync index for remote repositories.
         msg_normal "xbps-src: updating repositories for target ($XBPS_TARGET_MACHINE)...\n"
         env -- XBPS_TARGET_ARCH=$XBPS_TARGET_MACHINE \
-            xbps-install -r $XBPS_MASTERDIR/$XBPS_CROSS_BASE -S
+            $XBPS_INSTALL_CMD $XBPS_INSTALL_ARGS -r $XBPS_MASTERDIR/$XBPS_CROSS_BASE -S
     fi
 
     return 0
