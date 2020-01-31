@@ -65,9 +65,9 @@ static const struct arg args[] = {
 	/* function       format         argument */
 	{ netspeed_rx,    "%7s  ",      "enp4s0f2"                            },
 	{ netspeed_tx,    "%7s  | ",    "enp4s0f2"                            },
-	{ vol_raw,        "%2s 墳 | ",   "Master"                              },
+	{ vol_raw,        "%2s  | ",    "Master"                              },
 	{ cpu_perc,       "%3s  ",      NULL                                  },
-	{ temp,           "%3s 糖",      "/sys/class/hwmon/hwmon1/temp1_input" },
-	{ ram_perc,       "%3s 溜 | ",   NULL                                  },
+	{ temp,           "%3s  ",      "/sys/class/hwmon/hwmon1/temp1_input" },
+	{ ram_perc,       "%3s  | ",    NULL                                  },
 	{ datetime,       "%s",          "%a %d-%m %H:%M"                      },
 };
