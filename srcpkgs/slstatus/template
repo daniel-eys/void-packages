@@ -1,7 +1,7 @@
 # Template file for 'slstatus'
 pkgname=slstatus
 version=20190216
-revision=1
+revision=2
 _commit=b14e039639ed28005fbb8bddeb5b5fa0c93475ac
 wrksrc="slstatus-$_commit"
 build_style=gnu-makefile
