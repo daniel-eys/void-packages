@@ -20,12 +20,12 @@ static const char *colors[][3] = {
 
 /* tagging */
 static const char *tags[] = {
-	"", /*  0 music */
-	"", /*  1 web   */
-	"", /*  2 mail  */
-	"", /*  3 term  */
-	"", /*  4 chat  */
-	"", /*  5 misc  */
+	"", /*  0 music */
+	"", /*  1 web   */
+	"", /*  2 mail  */
+	"", /*  3 term  */
+	"", /*  4 chat  */
+	"", /*  5 misc  */
 };
 
 static const Rule rules[] = {
@@ -79,6 +79,7 @@ static const char    *mailcmd[] = { "st", "-t", "neomutt", "neomutt", NULL };
 static const char  *rangercmd[] = { "st", "-t", "ranger", "ranger", NULL };
 static const char   *gotopcmd[] = { "st", "-t", "gotop", "gotop", "-s", "-c", "solarized", NULL };
 static const char     *padcmd[] = { "st", "-t", "scratchpad", "-g", "80x24-50+40", NULL };
+static const char  *editorcmd[] = { "st", "-t", "neovim", "nvim", NULL };
 static const char    *lockcmd[] = { "i3lock", "-c", "000000", NULL };
 static const char  *rebootcmd[] = { "sudo", "reboot", NULL };
 static const char    *shutcmd[] = { "sudo", "poweroff", NULL };
@@ -97,6 +98,7 @@ static Key keys[] = {
 	{ ControlMask|MODKEY,           XK_j,      spawn,          {.v = rangercmd } },
 	{ ControlMask|MODKEY,           XK_g,      spawn,          {.v = gotopcmd } },
 	{ ControlMask|MODKEY,           XK_p,      spawn,          {.v = padcmd } },
+	{ ControlMask|MODKEY,           XK_e,      spawn,          {.v = editorcmd } },
 	{ ControlMask|MODKEY,           XK_l,      spawn,          {.v = lockcmd } },
 	{ ControlMask|MODKEY,           XK_r,      spawn,          {.v = rebootcmd } },
 	{ ControlMask|MODKEY,           XK_q,      spawn,          {.v = shutcmd } },
