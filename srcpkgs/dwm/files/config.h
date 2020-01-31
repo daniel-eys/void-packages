@@ -40,6 +40,7 @@ static const Rule rules[] = {
 	{ "mpv",         NULL,        NULL,        1 << 1,       0,           -1 },
 	{  NULL,         NULL,       "neomutt",    1 << 2,       0,           -1 },
 	{  NULL,         NULL,       "gotop",      1 << 0,       0,           -1 },
+	{  NULL,         NULL,       "ncmpcpp",    1 << 0,       0,           -1 },
 	{  NULL,         NULL,       "scratchpad",      0,       1,           -1 },
 };
 
@@ -79,6 +80,7 @@ static const char    *mailcmd[] = { "st", "-t", "neomutt", "neomutt", NULL };
 static const char  *rangercmd[] = { "st", "-t", "ranger", "ranger", NULL };
 static const char      *lfcmd[] = { "st", "-t", "lf", "lf", NULL };
 static const char   *gotopcmd[] = { "st", "-t", "gotop", "gotop", "-s", "-c", "solarized", NULL };
+static const char *ncmpcppcmd[] = { "st", "-t", "ncmpcpp", "ncmpcpp", NULL };
 static const char     *padcmd[] = { "st", "-t", "scratchpad", "-g", "80x24-50+40", NULL };
 static const char  *editorcmd[] = { "st", "-t", "neovim", "nvim", NULL };
 static const char    *lockcmd[] = { "i3lock", "-c", "000000", NULL };
@@ -99,6 +101,7 @@ static Key keys[] = {
 	{ ControlMask|MODKEY,           XK_j,      spawn,          {.v = rangercmd } },
 	{ ControlMask|MODKEY,           XK_f,      spawn,          {.v = lfcmd } },
 	{ ControlMask|MODKEY,           XK_g,      spawn,          {.v = gotopcmd } },
+	{ ControlMask|MODKEY,           XK_n,      spawn,          {.v = ncmpcppcmd } },
 	{ ControlMask|MODKEY,           XK_p,      spawn,          {.v = padcmd } },
 	{ ControlMask|MODKEY,           XK_e,      spawn,          {.v = editorcmd } },
 	{ ControlMask|MODKEY,           XK_l,      spawn,          {.v = lockcmd } },
