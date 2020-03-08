@@ -1,6 +1,6 @@
 # Template file for 'buildah'
 pkgname=buildah
-version=1.13.1
+version=1.14.2
 revision=1
 build_style=go
 go_import_path=github.com/containers/buildah
@@ -15,7 +15,11 @@ maintainer="Cameron Nemo <cnemo@tutanota.com>"
 license="Apache-2.0"
 homepage="https://github.com/containers/buildah"
 distfiles="${homepage}/archive/v${version}.tar.gz"
-checksum=fd5ef996813fcc9ca1d5ca218a9ede64202a1f95edf3d5514396d3555fc3b90b
+checksum=30481a33601bf735b2bc13801c129ffe05c03d2fb1c879aa1d4c220dc022c888
+
+if [ "$XBPS_TARGET_WORDSIZE" = "32" ]; then
+	broken="invalid operation: st.Type == _cgroup2SuperMagic (mismatched types int32 and int64)"
+fi
 
 post_build() {
 	make -C docs GOMD2MAN=go-md2man
