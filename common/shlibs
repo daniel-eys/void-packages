@@ -547,7 +547,7 @@ libakonadi-filestore.so.5 kdepim-runtime-17.12.3_1
 libmaildir.so.5 kdepim-runtime-17.12.3_1
 libfolderarchivesettings.so.5 kdepim-runtime-17.12.3_1
 libkColorPicker.so.0.1.1 kColorPicker-0.1.1_1
-libkImageAnnotator.so.0.2.0 kImageAnnotator-0.2.0_1
+libkImageAnnotator.so.0.2.1 kImageAnnotator-0.2.1_1
 libbabl-0.1.so.0 babl-0.1.16_1
 libbamf3.so.2 bamf-0.5.1_1
 libicuio.so.64 icu-libs-64.1_1
@@ -3010,6 +3010,7 @@ libflatpak.so.0 flatpak-0.9.3_2
 libnanomsg.so.5 nanomsg-1.1.3_1
 libindicator3.so.7 libindicator-12.10.1_1
 libappindicator3.so.1 libappindicator-12.10.0_1
+libscanmem.so.1 libscanmem-0.17_5
 libsctp.so.1 lksctp-tools-1.0.17_1
 libwithsctp.so.1 lksctp-tools-1.0.17_1
 libnss_ldap.so.2 nss-pam-ldapd-0.9.7_4
@@ -3821,6 +3822,7 @@ libgmio.so gmio-0.4.1_1
 libjsonnet.so.0 jsonnet-0.14.0_2
 libjsonnet++.so.0 jsonnet-0.14.0_2
 libigdgmm.so.11 intel-gmmlib-19.4.1_1
+libgtk-layer-shell.so.0 gtk-layer-shell-0.1.0_1
 libgtk-layer-shell.so.0 wf-shell-0.3_1
 librdkafka.so.1 librdkafka-1.3.0_1
 librdkafka++.so.1 librdkafka-1.3.0_1
@@ -3844,5 +3846,4 @@ libOpenImageDenoise.so.0 openimagedenoise-1.1.0_1
 libblosc.so.1 c-blosc-1.17.1_1
 libopenvdb.so.7.0 openvdb-7.0.0_1
 libAlembic.so.1.7 alembic-1.7.12_1
-libfacter.so.3.14.8 facter-3.14.8_1
 libmodsecurity.so.3 modsecurity-3.0.4_1
