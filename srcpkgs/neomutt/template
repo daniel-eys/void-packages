@@ -1,15 +1,16 @@
 # Template file for 'neomutt'
 pkgname=neomutt
 version=20200313
-revision=1
+revision=2
 build_style=configure
-configure_args="--disable-idn --gpgme --idn2 --lmdb --lua --notmuch --sasl --ssl"
+configure_args="--disable-idn --gpgme --idn2 --lmdb --lua --notmuch --sasl --ssl
+ --zlib"
 make_check_target=test
 conf_files="/etc/neomuttrc"
 # neomutt needs either w3m/lynx/elinks to build manual.html
 hostmakedepends="docbook-xsl gettext libxslt perl tcl w3m"
 makedepends="aspell-devel gettext-devel gpgme-devel libidn2-devel libnotmuch-devel
- libressl-devel libsasl-devel lmdb-devel lua-devel"
+ libressl-devel libsasl-devel lmdb-devel lua-devel zlib-devel"
 depends="mime-types"
 short_desc="Mutt with misc fixes and feature patches"
 maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
