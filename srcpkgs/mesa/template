@@ -1,7 +1,7 @@
 # Template file for 'mesa'
 pkgname=mesa
-version=20.0.2
-revision=2
+version=20.0.4
+revision=1
 wrksrc="mesa-${version}"
 build_style=meson
 configure_args="-Dglvnd=true -Dshared-glapi=true -Dgbm=true -Degl=true
@@ -24,7 +24,7 @@ license="MIT, LGPL-2.1-or-later"
 homepage="https://www.mesa3d.org/"
 changelog="https://www.mesa3d.org/relnotes/${version}.html"
 distfiles="https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
-checksum=aa54f1cb669550606aab8ceb475105d15aeb814fca5a778ce70d0fd10e98e86f
+checksum=c4ed491517a94118a7a611810eeb92645d42ffd82280dcd51be8cc2ba1aabba5
 
 build_options="wayland"
 build_options_default="wayland"

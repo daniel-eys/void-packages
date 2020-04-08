@@ -1,7 +1,7 @@
 # Template file for 'gtk+3'
 pkgname=gtk+3
-version=3.24.14
-revision=1
+version=3.24.17
+revision=2
 wrksrc="gtk+-${version}"
 build_style=gnu-configure
 build_helper="gir"
@@ -26,7 +26,7 @@ maintainer="Enno Boland <gottox@voidlinux.org>"
 license="LGPL-2.1-or-later"
 homepage="https://www.gtk.org/"
 distfiles="${GNOME_SITE}/gtk+/${version%.*}/gtk+-${version}.tar.xz"
-checksum=1c4d69f93ab884fd80c6b95115bfbc12d51ecd029178b6dad3672fdc5ff91e88
+checksum=f210255b221cb0f0db3e7b21399983b715c9dda6eb1e5c2f7fdf38f4f1b6bac0
 
 # Package build options
 build_options="broadway colord cups gir cloudproviders wayland x11"

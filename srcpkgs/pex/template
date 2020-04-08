@@ -1,6 +1,6 @@
 # Template file for 'pex'
 pkgname=pex
-version=2.1.6
+version=2.1.8
 revision=1
 archs=noarch
 wrksrc="pex-${version}"
@@ -12,7 +12,7 @@ maintainer="Daniel Santana <daniel@santana.tech>"
 license="Apache-2.0"
 homepage="https://github.com/pantsbuild/pex"
 distfiles="${PYPI_SITE}/p/pex/pex-${version}.tar.gz"
-checksum=68da0a75eb23e9f6d617048cfaa822449d1da3e40b8af8d0465b055564d06f8d
+checksum=64e2f8146e0c00fd50213ac01933014aadd7b00c7709e961067c4c47f37fe31f
 
 post_build() {
 	PYTHONPATH="$PWD" make -C docs man
