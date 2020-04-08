@@ -23,9 +23,8 @@ static const char *tags[] = {
 	"", /*  0 music */
 	"", /*  1 web   */
 	"", /*  2 mail  */
-	"", /*  3 term  */
-	"", /*  4 chat  */
-	"", /*  5 misc  */
+	"", /*  3 chat  */
+	"", /*  4 misc  */
 };
 
 static const Rule rules[] = {
