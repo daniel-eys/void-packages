@@ -73,6 +73,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char   *dmenucmd[] = { "dmenu_run", "-F", "-i", "-m", dmenumon, "-fn", dmenufont, "-nb", col_dgray, "-nf", col_gray, "-sb", col_cyan, "-sf", col_bgray, NULL };
+static const char *mpdmenucmd[] = { "mpdmenu", NULL };
 static const char    *termcmd[] = { "st", NULL };
 static const char    *browcmd[] = { "qutebrowser", NULL };
 static const char    *mailcmd[] = { "st", "-t", "neomutt", "neomutt", NULL };
@@ -94,6 +95,7 @@ static const char    *volmute[] = { "amixer", "-q", "set", "Master", "toggle", N
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,               XK_semicolon,      spawn,          {.v = mpdmenucmd } },
 	{ ControlMask|MODKEY,           XK_t,      spawn,          {.v = termcmd } },
 	{ ControlMask|MODKEY,           XK_b,      spawn,          {.v = browcmd } },
 	{ ControlMask|MODKEY,           XK_m,      spawn,          {.v = mailcmd } },
