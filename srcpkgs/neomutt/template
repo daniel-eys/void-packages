@@ -1,7 +1,7 @@
 # Template file for 'neomutt'
 pkgname=neomutt
 version=20200417
-revision=1
+revision=2
 build_style=configure
 configure_args="--disable-idn --gpgme --idn2 --lmdb --lua --notmuch --sasl --ssl
  --zlib --zstd"
@@ -28,6 +28,10 @@ fi
 case "${XBPS_TARGET_MACHINE}" in
 	x86_64-musl) CFLAGS="-D_FILE_OFFSET_BITS=64 -DLARGEFILE_SOURCE=1";;
 esac
+
+pre_check() {
+	export NEOMUTT_TEST_DIR=$(mktemp -d)
+}
 
 post_install() {
 	vsconf contrib/gpg.rc Muttrc.gpg.dist
