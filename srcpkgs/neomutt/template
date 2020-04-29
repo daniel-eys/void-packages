@@ -18,6 +18,7 @@ license="GPL-2.0-or-later"
 homepage="https://neomutt.org/"
 distfiles="https://github.com/neomutt/neomutt/archive/${version}.tar.gz"
 checksum=e708d04f057a788041acaced765861bcfbab50f287f8e83620447ec8eb5145df
+python_version=3
 
 if [ "${XBPS_CROSS_BASE}" ]; then
 	configure_args="${configure_args} --host=$XBPS_CROSS_TRIPLET"
