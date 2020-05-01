@@ -1,6 +1,6 @@
 # Template file for 'neomutt'
 pkgname=neomutt
-version=20200424
+version=20200501
 revision=1
 build_style=configure
 configure_args="--disable-idn --gpgme --idn2 --lmdb --lua --notmuch --sasl --ssl
@@ -17,7 +17,7 @@ maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="GPL-2.0-or-later"
 homepage="https://neomutt.org/"
 distfiles="https://github.com/neomutt/neomutt/archive/${version}.tar.gz"
-checksum=e708d04f057a788041acaced765861bcfbab50f287f8e83620447ec8eb5145df
+checksum=9d0a0da14448ebb60f2585532fc4cd903c10146903c8639cd0a3d51fe620430f
 python_version=3
 
 if [ "${XBPS_CROSS_BASE}" ]; then
