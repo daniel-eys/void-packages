@@ -1,24 +1,24 @@
 # Template file for 'st'
 pkgname=st
-version=0.8.2
-revision=2
+version=0.8.3
+revision=1
 build_style=gnu-makefile
 make_use_env=compliant
 hostmakedepends="pkg-config"
 makedepends="fontconfig-devel libX11-devel libXft-devel"
 depends="ncurses st-terminfo-${version}_${revision}"
 short_desc="Simple terminal implementation for X"
-maintainer="Nathan Owens <ndowens04@gmail.com>"
+maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="MIT"
 homepage="https://st.suckless.org"
-distfiles="https://dl.suckless.org/${pkgname}/${pkgname}-${version}.tar.gz"
-checksum=aeb74e10aa11ed364e1bcc635a81a523119093e63befd2f231f8b0705b15bf35
+distfiles="https://dl.suckless.org/st/st-${version}.tar.gz"
+checksum=939ae3da237e7c9489694853c205c7cbd5f2a2f0c17fe41a07477f1df8e28552
 
 pre_build() {
-	sed -i 's|Liberation Mono|Monospace|g' config.def.h
+	vsed -i 's|Liberation Mono|Monospace|g' config.def.h
 	[ -e ${FILESDIR}/config.h ] && cp ${FILESDIR}/config.h config.h
 	# We will use tic after install. See INSTALL.
-	sed -i '/tic/d' Makefile
+	vsed -i '/tic/d' Makefile
 }
 
 post_install() {
