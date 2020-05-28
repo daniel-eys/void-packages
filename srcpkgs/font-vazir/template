@@ -1,6 +1,6 @@
 # Template file for 'font-vazir'
 pkgname=font-vazir
-version=24.1.0
+version=26.0.2
 revision=1
 archs=noarch
 create_wrksrc=yes
@@ -10,7 +10,7 @@ maintainer="linarcx <linarcx@gmail.com>"
 license="OFL-1.1"
 homepage="https://github.com/rastikerdar/vazir-font"
 distfiles="https://github.com/rastikerdar/vazir-font/releases/download/v${version}/vazir-font-v${version}.zip"
-checksum=ef43553849a96b96f6f3d756b5639bde8778541b4243978646fdbef01b5b3f87
+checksum=cb74f7db8257d783d6301c798ae2e10d25035aaf4d202fca17c2129578ab29c3
 
 font_dirs="/usr/share/fonts/TTF"
 

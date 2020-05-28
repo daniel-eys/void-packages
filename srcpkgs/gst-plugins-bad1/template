@@ -1,7 +1,7 @@
 # Template file for 'gst-plugins-bad1'
 pkgname=gst-plugins-bad1
 version=1.16.2
-revision=4
+revision=5
 wrksrc="${pkgname/1/}-${version}"
 build_helper="gir"
 build_style=meson
@@ -54,6 +54,8 @@ gst-plugins-bad1-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove usr/lib/*.so
-		vmove "usr/share/gir*"
+		if [ "$build_option_gir" ]; then
+			vmove "usr/share/gir*"
+		fi
 	}
 }
