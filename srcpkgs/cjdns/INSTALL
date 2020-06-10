@@ -1,0 +1,7 @@
+case "${ACTION}" in
+post)
+	if [ ! -e etc/cjdroute.conf ]; then
+		umask 077 && cjdroute --genconf > etc/cjdroute.conf
+	fi
+	;;
+esac

@@ -1,0 +1,27 @@
+# Template file for 'cjdns'
+pkgname=cjdns
+version=20.6
+revision=1
+wrksrc="cjdns-cjdns-v${version}"
+hostmakedepends="nodejs python3"
+short_desc="Encrypted IPv6 network"
+maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/cjdelisle/cjdns"
+distfiles="https://github.com/cjdelisle/cjdns/archive/cjdns-v${version}.tar.gz"
+checksum=bd80e94eb684a9e73170cf0ba158ce3514284546999568aeaf10065c5de03304
+
+do_build() {
+	if [ "$CROSS_BUILD" ]; then
+		export CROSS=y
+	fi
+	export CJDNS_RELEASE_VERSION="${version}"
+	unset CFLAGS LDFLAGS
+	node ./node_build/make.js
+}
+
+do_install() {
+	vbin cjdroute
+	vman doc/man/cjdroute.conf.5
+	vsv cjdns
+}

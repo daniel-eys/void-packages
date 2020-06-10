@@ -1,0 +1,30 @@
+diff --git node_build/make.js node_build/make.js
+index 191f0c2c..d6ad8700 100644
+--- node_build/make.js
++++ node_build/make.js
+@@ -99,12 +99,6 @@ Builder.configure({
+         builder.config.cflags.push('-D', 'ADDRESS_PREFIX_BITS=' + process.env['ADDRESS_PREFIX_BITS']);
+     }
+ 
+-    if (!builder.config.crossCompiling) {
+-        if (NO_MARCH_FLAG.indexOf(process.arch) == -1) {
+-            builder.config.cflags.push('-march=native');
+-        }
+-    }
+-
+     if (builder.config.systemName === 'win32') {
+         builder.config.cflags.push('-Wno-format');
+     } else if (builder.config.systemName === 'linux') {
+@@ -289,12 +283,6 @@ Builder.configure({
+                     [].push.apply(args, CFLAGS.split(' '));
+                 }
+ 
+-                if (!builder.config.crossCompiling) {
+-                    if (NO_MARCH_FLAG.indexOf(process.arch) == -1) {
+-                        args.unshift('-march=native');
+-                    }
+-                }
+-
+                 builder.cc(args, callback);
+             },
+             builder.config,

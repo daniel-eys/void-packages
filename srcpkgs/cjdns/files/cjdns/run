@@ -1,0 +1,3 @@
+#!/bin/sh
+modprobe tun
+exec cjdroute --nobg < /etc/cjdroute.conf
