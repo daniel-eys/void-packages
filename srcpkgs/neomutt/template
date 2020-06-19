@@ -1,10 +1,14 @@
 # Template file for 'neomutt'
 pkgname=neomutt
-version=20200501
+version=20200619
 revision=1
+_testfilescommit=8629adab700a75c54e8e28bf05ad092503a98f75
+wrksrc="neomutt-${version}"
+create_wrksrc=true
+build_wrksrc="$wrksrc"
 build_style=configure
 configure_args="--disable-idn --gpgme --idn2 --lmdb --lua --notmuch --sasl --ssl
- --zlib --zstd"
+ --testing --zlib --zstd"
 make_check_target=test
 conf_files="/etc/neomuttrc"
 # neomutt needs either w3m/lynx/elinks to build manual.html
@@ -16,8 +20,10 @@ short_desc="Mutt with misc fixes and feature patches"
 maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="GPL-2.0-or-later"
 homepage="https://neomutt.org/"
-distfiles="https://github.com/neomutt/neomutt/archive/${version}.tar.gz"
-checksum=9d0a0da14448ebb60f2585532fc4cd903c10146903c8639cd0a3d51fe620430f
+distfiles="https://github.com/neomutt/neomutt/archive/${version}.tar.gz
+ https://github.com/neomutt/neomutt-test-files/archive/${_testfilescommit}.tar.gz"
+checksum="4449d43b3586a730ead151c66afc6af37e3ea15b3e72065e579a9e9884146acc
+ a53d6447cf4e8f60bd9a3caf68a1cfe1bfda878b5bcb8c60b965b5214de73ff9"
 python_version=3
 
 if [ "${XBPS_CROSS_BASE}" ]; then
@@ -31,7 +37,16 @@ case "${XBPS_TARGET_MACHINE}" in
 esac
 
 pre_check() {
-	export NEOMUTT_TEST_DIR=$(mktemp -d)
+	(
+	 cd ${wrksrc}/neomutt-test-files-${_testfilescommit}/
+	 ./setup.sh
+	)
+	export NEOMUTT_TEST_DIR=${wrksrc}/neomutt-test-files-${_testfilescommit}
+}
+
+post_check() {
+	# This is a file chmodded to 311 and can't be removed normally
+	chmod 777 ${wrksrc}/neomutt-test-files-${_testfilescommit}/maildir/damson
 }
 
 post_install() {
