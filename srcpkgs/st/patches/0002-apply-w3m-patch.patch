@@ -1,0 +1,25 @@
+From 5e24f46147164e47adf8a493e2b0af3ce0502be8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
+Date: Mon, 29 Jun 2020 02:30:06 +0200
+Subject: [PATCH 2/2] apply w3m patch
+
+---
+ x.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git x.c x.c
+index 210f184..1227dd5 100644
+--- x.c
++++ x.c
+@@ -1595,6 +1595,8 @@ xsettitle(char *p)
+ int
+ xstartdraw(void)
+ {
++	if (IS_SET(MODE_VISIBLE))
++		XCopyArea(xw.dpy, xw.win, xw.buf, dc.gc, 0, 0, win.w, win.h, 0, 0);
+ 	return IS_SET(MODE_VISIBLE);
+ }
+ 
+-- 
+2.27.0
+
