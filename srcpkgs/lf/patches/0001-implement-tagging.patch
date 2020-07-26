@@ -1,6 +1,6 @@
-From 002dabc84aa77b7cf41a1c476c3f278acfd6a68c Mon Sep 17 00:00:00 2001
+From f42c8800c305deda7eaf91caeb3080e512f9e33d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
-Date: Thu, 2 Jul 2020 02:31:18 +0200
+Date: Sun, 26 Jul 2020 17:41:01 +0200
 Subject: [PATCH] implement tagging
 
 ---
@@ -17,7 +17,7 @@ Subject: [PATCH] implement tagging
  10 files changed, 112 insertions(+), 7 deletions(-)
 
 diff --git complete.go complete.go
-index fd16618..e1a952d 100644
+index 5cb24dd..a64a1e8 100644
 --- complete.go
 +++ complete.go
 @@ -26,6 +26,7 @@ var (
@@ -29,18 +29,18 @@ index fd16618..e1a952d 100644
  		"unselect",
  		"copy",
 diff --git doc.go doc.go
-index e34292e..662efba 100644
+index b598f6c..8446eba 100644
 --- doc.go
 +++ doc.go
-@@ -28,6 +28,7 @@ The following commands are provided by lf with default keybindings:
+@@ -27,6 +27,7 @@ The following commands are provided by lf with default keybindings:
+     quit                     (default 'q')
      top                      (default 'gg' and '<home>')
      bottom                   (default 'G' and '<end>')
-     toggle                   (default '<space>')
 +    toggletag                (default 't')
      invert                   (default 'v')
      unselect                 (default 'u')
      copy                     (default 'y')
-@@ -198,6 +199,11 @@ Marks file should be located at:
+@@ -201,6 +202,11 @@ Marks file should be located at:
      unix     ~/.local/share/lf/marks
      windows  C:\Users\<user>\AppData\Local\lf\marks
  
@@ -53,18 +53,18 @@ index e34292e..662efba 100644
  
      unix     ~/.local/share/lf/history
 diff --git docstring.go docstring.go
-index 7afa386..ba6f7c7 100644
+index b5208a4..c04f226 100644
 --- docstring.go
 +++ docstring.go
-@@ -31,6 +31,7 @@ The following commands are provided by lf with default keybindings:
+@@ -30,6 +30,7 @@ The following commands are provided by lf with default keybindings:
+     quit                     (default 'q')
      top                      (default 'gg' and '<home>')
      bottom                   (default 'G' and '<end>')
-     toggle                   (default '<space>')
 +    toggletag                (default 't')
      invert                   (default 'v')
      unselect                 (default 'u')
      copy                     (default 'y')
-@@ -202,6 +203,11 @@ Marks file should be located at:
+@@ -205,6 +206,11 @@ Marks file should be located at:
      unix     ~/.local/share/lf/marks
      windows  C:\Users\<user>\AppData\Local\lf\marks
  
@@ -77,10 +77,10 @@ index 7afa386..ba6f7c7 100644
  
      unix     ~/.local/share/lf/history
 diff --git eval.go eval.go
-index 0ef9604..a8e4ae0 100644
+index 95a0e14..3857767 100644
 --- eval.go
 +++ eval.go
-@@ -678,6 +678,14 @@ func (e *callExpr) eval(app *app, args []string) {
+@@ -707,6 +707,14 @@ func (e *callExpr) eval(app *app, args []string) {
  		app.nav.bottom()
  		app.ui.loadFile(app.nav)
  		app.ui.loadFileInfo(app.nav)
@@ -93,21 +93,21 @@ index 0ef9604..a8e4ae0 100644
 +			app.ui.echoerrf("tag: %s", err)
 +		}
  	case "toggle":
- 		for i := 0; i < e.count; i++ {
+ 		if len(e.args) == 0 {
  			app.nav.toggle()
 diff --git lf.1 lf.1
-index 359230b..9c3d336 100644
+index bcc7420..3269743 100644
 --- lf.1
 +++ lf.1
-@@ -38,6 +38,7 @@ The following commands are provided by lf with default keybindings:
+@@ -37,6 +37,7 @@ The following commands are provided by lf with default keybindings:
+     quit                     (default 'q')
      top                      (default 'gg' and '<home>')
      bottom                   (default 'G' and '<end>')
-     toggle                   (default '<space>')
 +    toggletag                (default 't')
      invert                   (default 'v')
      unselect                 (default 'u')
      copy                     (default 'y')
-@@ -226,6 +227,13 @@ Marks file should be located at:
+@@ -229,6 +230,13 @@ Marks file should be located at:
      windows  C:\eUsers\e<user>\eAppData\eLocal\elf\emarks
  .EE
  .PP
@@ -122,26 +122,26 @@ index 359230b..9c3d336 100644
  .PP
  .EX
 diff --git nav.go nav.go
-index f717aee..a7bd5a1 100644
+index 173402b..9435991 100644
 --- nav.go
 +++ nav.go
-@@ -262,6 +262,7 @@ type nav struct {
+@@ -269,6 +269,7 @@ type nav struct {
  	dirCache        map[string]*dir
  	regCache        map[string]*reg
  	saves           map[string]bool
 +	tags            map[string]bool
  	marks           map[string]string
- 	renameCache     []string
- 	selections      map[string]int
-@@ -351,6 +352,7 @@ func newNav(height int) *nav {
+ 	renameOldPath   string
+ 	renameNewPath   string
+@@ -362,6 +363,7 @@ func newNav(height int) *nav {
  		dirCache:        make(map[string]*dir),
  		regCache:        make(map[string]*reg),
  		saves:           make(map[string]bool),
 +		tags:            make(map[string]bool),
  		marks:           make(map[string]string),
- 		renameCache:     make([]string, 2),
  		selections:      make(map[string]int),
-@@ -608,6 +610,21 @@ func (nav *nav) toggleSelection(path string) {
+ 		selectionInd:    0,
+@@ -610,6 +612,21 @@ func (nav *nav) toggleSelection(path string) {
  	}
  }
  
@@ -163,7 +163,7 @@ index f717aee..a7bd5a1 100644
  func (nav *nav) toggle() {
  	curr, err := nav.currFile()
  	if err != nil {
-@@ -851,7 +868,15 @@ func (nav *nav) sync() error {
+@@ -898,7 +915,15 @@ func (nav *nav) sync() error {
  		nav.saves[f] = cp
  	}
  
@@ -180,7 +180,7 @@ index f717aee..a7bd5a1 100644
  }
  
  func (nav *nav) cd(wd string) error {
-@@ -1112,6 +1137,29 @@ func (nav *nav) readMarks() error {
+@@ -1162,6 +1187,29 @@ func (nav *nav) readMarks() error {
  	return nil
  }
  
@@ -210,7 +210,7 @@ index f717aee..a7bd5a1 100644
  func (nav *nav) writeMarks() error {
  	if err := os.MkdirAll(filepath.Dir(gMarksPath), os.ModePerm); err != nil {
  		return fmt.Errorf("creating data directory: %s", err)
-@@ -1139,6 +1187,27 @@ func (nav *nav) writeMarks() error {
+@@ -1189,6 +1237,27 @@ func (nav *nav) writeMarks() error {
  	return nil
  }
  
@@ -239,22 +239,22 @@ index f717aee..a7bd5a1 100644
  	return nav.dirs[len(nav.dirs)-1]
  }
 diff --git opts.go opts.go
-index 25cdc1c..106b250 100644
+index db8e6b8..80332e2 100644
 --- opts.go
 +++ opts.go
-@@ -119,6 +119,7 @@ func init() {
+@@ -123,6 +123,7 @@ func init() {
  	gOpts.keys["G"] = &callExpr{"bottom", nil, 1}
  	gOpts.keys["<end>"] = &callExpr{"bottom", nil, 1}
- 	gOpts.keys["<space>"] = &callExpr{"toggle", nil, 1}
+ 	gOpts.keys["<space>"] = &listExpr{[]expr{&callExpr{"toggle", nil, 1}, &callExpr{"down", nil, 1}}, 1}
 +	gOpts.keys["t"] = &callExpr{"toggletag", nil, 1}
  	gOpts.keys["v"] = &callExpr{"invert", nil, 1}
  	gOpts.keys["u"] = &callExpr{"unselect", nil, 1}
  	gOpts.keys["y"] = &callExpr{"copy", nil, 1}
 diff --git os.go os.go
-index 1a26857..2924b8b 100644
+index ca8ab50..2ed253e 100644
 --- os.go
 +++ os.go
-@@ -30,6 +30,7 @@ var (
+@@ -31,6 +31,7 @@ var (
  	gUser        *user.User
  	gConfigPaths []string
  	gMarksPath   string
@@ -262,7 +262,7 @@ index 1a26857..2924b8b 100644
  	gHistoryPath string
  )
  
-@@ -82,6 +83,7 @@ func init() {
+@@ -83,6 +84,7 @@ func init() {
  	}
  
  	gMarksPath = filepath.Join(data, "lf", "marks")
@@ -271,7 +271,7 @@ index 1a26857..2924b8b 100644
  
  	gDefaultSocketPath = filepath.Join(os.TempDir(), fmt.Sprintf("lf.%s.sock", gUser.Username))
 diff --git os_windows.go os_windows.go
-index 8f2de15..7f2a21c 100644
+index 45d099d..fcfa7d2 100644
 --- os_windows.go
 +++ os_windows.go
 @@ -30,6 +30,7 @@ var (
@@ -291,10 +291,10 @@ index 8f2de15..7f2a21c 100644
  }
  
 diff --git ui.go ui.go
-index 722f2ab..2103525 100644
+index 97b36fb..fd4f936 100644
 --- ui.go
 +++ ui.go
-@@ -243,7 +243,7 @@ func fileInfo(f *file, d *dir) string {
+@@ -247,7 +247,7 @@ func fileInfo(f *file, d *dir) string {
  	return info
  }
  
@@ -303,7 +303,7 @@ index 722f2ab..2103525 100644
  	if win.w < 5 || dir == nil {
  		return
  	}
-@@ -303,13 +303,15 @@ func (win *win) printDir(dir *dir, selections map[string]int, saves map[string]b
+@@ -315,13 +315,15 @@ func (win *win) printDir(dir *dir, selections map[string]int, saves map[string]b
  		path := filepath.Join(dir.path, f.Name())
  
  		if _, ok := selections[path]; ok {
@@ -322,7 +322,7 @@ index 722f2ab..2103525 100644
  		}
  
  		if i == dir.pos {
-@@ -673,7 +675,7 @@ func (ui *ui) draw(nav *nav) {
+@@ -696,7 +698,7 @@ func (ui *ui) draw(nav *nav) {
  
  	doff := len(nav.dirs) - length
  	for i := 0; i < length; i++ {
@@ -331,13 +331,13 @@ index 722f2ab..2103525 100644
  	}
  
  	switch ui.cmdPrefix {
-@@ -699,7 +701,7 @@ func (ui *ui) draw(nav *nav) {
+@@ -722,7 +724,7 @@ func (ui *ui) draw(nav *nav) {
  			preview := ui.wins[len(ui.wins)-1]
  
- 			if f.IsDir() {
+ 			if curr.IsDir() {
 -				preview.printDir(ui.dirPrev, nav.selections, nav.saves, ui.colors, ui.icons)
 +				preview.printDir(ui.dirPrev, nav.selections, nav.saves, nav.tags, ui.colors, ui.icons)
- 			} else if f.Mode().IsRegular() {
+ 			} else if curr.Mode().IsRegular() {
  				preview.printReg(ui.regPrev)
  			}
 -- 
