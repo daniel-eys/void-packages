@@ -1,7 +1,7 @@
-From 12f2c51291b9316836559c8ef6c926e6ec2050e3 Mon Sep 17 00:00:00 2001
+From 613f477bc9002f501405209785b2b16494ae2389 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Sat, 29 Sep 2018 02:50:46 +0200
-Subject: [PATCH 1/2] ctrl-j/ctrl-k for down/up
+Subject: [PATCH 7/8] ctrl-j/ctrl-k for down/up
 
 ---
  dmenu.1 | 10 ++--------
@@ -42,7 +42,7 @@ index 323f93c..e592695 100644
  Delete line left
  .TP
 diff --git dmenu.c dmenu.c
-index 6b8f51b..a3bd203 100644
+index 65f25ce..ce7d347 100644
 --- dmenu.c
 +++ dmenu.c
 @@ -334,17 +334,14 @@ keypress(XKeyEvent *ev)
@@ -68,5 +68,5 @@ index 6b8f51b..a3bd203 100644
  			insert(NULL, 0 - cursor);
  			break;
 -- 
-2.21.0
+2.28.0
 
