@@ -84,10 +84,9 @@ static const char *ncmpcppcmd[] = { "st", "-t", "ncmpcpp", "ncmpcpp", NULL };
 static const char     *padcmd[] = { "st", "-t", "scratchpad", "-g", "80x24-50+40", NULL };
 static const char  *editorcmd[] = { "st", "-t", "neovim", "nvim", NULL };
 static const char    *lockcmd[] = { "i3lock", "-c", "000000", NULL };
-static const char  *rebootcmd[] = { "sudo", "reboot", NULL };
-static const char    *shutcmd[] = { "sudo", "poweroff", NULL };
-static const char    *suspcmd[] = { "sudo", "zzz", NULL };
-static const char   *hibercmd[] = { "sudo", "ZZZ", NULL };
+static const char  *rebootcmd[] = { "doas", "/usr/bin/reboot", NULL };
+static const char    *shutcmd[] = { "doas", "/usr/bin/shutdown", "-h", "now", NULL };
+static const char    *suspcmd[] = { "doas", "/usr/bin/zzz", NULL };
 static const char    *voldown[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
 static const char      *volup[] = { "amixer", "-q", "set", "Master", "5%+", NULL };
 static const char    *volmute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
@@ -109,7 +108,6 @@ static Key keys[] = {
 	{ ControlMask|MODKEY,           XK_r,      spawn,          {.v = rebootcmd } },
 	{ ControlMask|MODKEY,           XK_q,      spawn,          {.v = shutcmd } },
 	{ ControlMask|MODKEY,           XK_s,      spawn,          {.v = suspcmd } },
-	{ ControlMask|MODKEY,           XK_h,      spawn,          {.v = hibercmd } },
 	{ ControlMask|MODKEY,           XK_i,      spawn,          SHCMD("$HOME/bin/set-screen") },
 	{ ControlMask|MODKEY,           XK_w,      spawn,          SHCMD("$HOME/bin/set-wallpaper") },
 	{ MODKEY,                       XK_g,      spawn,          SHCMD("$HOME/bin/focus-browser") },
