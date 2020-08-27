@@ -1,0 +1,20 @@
+# Template file for 'gokey'
+pkgname=gokey
+version=0.1.0
+revision=1
+build_style=go
+go_import_path=github.com/cloudflare/gokey
+go_package="${go_import_path}/cmd/gokey"
+hostmakedepends="pandoc"
+short_desc="Simple vaultless password manager in Go"
+maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
+license="BSD-3-Clause"
+homepage="https://github.com/cloudflare/gokey"
+distfiles="https://github.com/cloudflare/gokey/archive/v${version}.tar.gz"
+checksum=e26d010c361c1a9dc2cfd0c0fce40357154c5095aacbe4948777ed107f4691ab
+
+post_install() {
+	pandoc -s -t man gokey.1.md -o gokey.1
+	vman gokey.1
+	vlicense LICENSE
+}
