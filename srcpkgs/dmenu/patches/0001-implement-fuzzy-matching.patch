@@ -1,7 +1,7 @@
-From 596e16823f29ecc63878f48ced0e0d09265e054f Mon Sep 17 00:00:00 2001
+From 8247a865f2ef4fe9a718ff000decfbecdee88216 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20Ey=C3=9Fer?= <daniel.eysser@gmail.com>
 Date: Sat, 6 Oct 2018 22:13:49 +0200
-Subject: [PATCH 8/8] implement fuzzy matching
+Subject: [PATCH] implement fuzzy matching
 
 ---
  config.def.h |  3 +-
@@ -25,7 +25,7 @@ index 1edb647..2fb60c9 100644
  static const char *fonts[] = {
  	"monospace:size=10"
 diff --git config.mk config.mk
-index 0929b4a..bcd79ea 100644
+index 05d5a3e..a152184 100644
 --- config.mk
 +++ config.mk
 @@ -19,8 +19,8 @@ FREETYPEINC = /usr/include/freetype2
@@ -40,7 +40,7 @@ index 0929b4a..bcd79ea 100644
  # flags
  CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L -DVERSION=\"$(VERSION)\" $(XINERAMAFLAGS)
 diff --git dmenu.1 dmenu.1
-index e592695..ada0073 100644
+index 323f93c..5c71990 100644
 --- dmenu.1
 +++ dmenu.1
 @@ -3,7 +3,7 @@
@@ -63,7 +63,7 @@ index e592695..ada0073 100644
  dmenu matches menu items case insensitively.
  .TP
 diff --git dmenu.c dmenu.c
-index ce7d347..8f01595 100644
+index 65f25ce..9207db9 100644
 --- dmenu.c
 +++ dmenu.c
 @@ -1,6 +1,7 @@
@@ -177,7 +177,7 @@ index ce7d347..8f01595 100644
  	static char **tokv = NULL;
  	static int tokn = 0;
  
-@@ -706,6 +793,8 @@ main(int argc, char *argv[])
+@@ -709,6 +796,8 @@ main(int argc, char *argv[])
  			topbar = 0;
  		else if (!strcmp(argv[i], "-f"))   /* grabs keyboard before reading stdin */
  			fast = 1;
