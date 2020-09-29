@@ -1,6 +1,6 @@
 # Template file for 'neomutt'
 pkgname=neomutt
-version=20200821
+version=20200925
 revision=1
 _testfilescommit=8629adab700a75c54e8e28bf05ad092503a98f75
 wrksrc="neomutt-${version}"
@@ -20,6 +20,7 @@ short_desc="Mutt with misc fixes and feature patches"
 maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="GPL-2.0-or-later"
 homepage="https://neomutt.org/"
+_test_files_hash=8629adab700a75c54e8e28bf05ad092503a98f75
 distfiles="https://github.com/neomutt/neomutt/archive/${version}.tar.gz
  https://github.com/neomutt/neomutt-test-files/archive/${_testfilescommit}.tar.gz"
 checksum="4233d03e03220a2ba8096ab28061e12ef538259fd7d32ad441aad5207b17b390
