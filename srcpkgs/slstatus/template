@@ -1,9 +1,9 @@
 # Template file for 'slstatus'
 pkgname=slstatus
 version=20190216
-revision=3
+revision=4
 _commit=b14e039639ed28005fbb8bddeb5b5fa0c93475ac
-wrksrc="slstatus-$_commit"
+wrksrc="slstatus-${_commit}"
 build_style=gnu-makefile
 makedepends="alsa-lib-devel libX11-devel"
 short_desc="Suckless status monitor for dwm"

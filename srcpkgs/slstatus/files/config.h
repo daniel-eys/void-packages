@@ -63,8 +63,8 @@ static const char unknown_str[] = "n/a";
 
 static const struct arg args[] = {
 	/* function       format         argument */
-	{ netspeed_rx,    "%7s  ",      "enp4s0f2"                            },
-	{ netspeed_tx,    "%7s  | ",    "enp4s0f2"                            },
+	{ netspeed_rx,    "%8s  ",      "enp4s0f2"                            },
+	{ netspeed_tx,    "%8s  | ",    "enp4s0f2"                            },
 	{ vol_raw,        "%2s  | ",    "Master"                              },
 	{ cpu_perc,       "%3s  ",      NULL                                  },
 	{ temp,           "%3s  ",      "/sys/class/hwmon/hwmon1/temp1_input" },
