@@ -29,7 +29,6 @@ post_install() {
 
 st-terminfo_package() {
 	short_desc+=" - terminfo data"
-	archs=noarch
 	pkg_install() {
 		vmove usr/share/terminfo
 	}
