@@ -1,6 +1,6 @@
 # Template file for 'jack'
 pkgname=jack
-version=1.9.16
+version=1.9.17
 revision=1
 wrksrc="jack2-${version}"
 build_style=waf3
@@ -14,14 +14,14 @@ maintainer="Daniel Eyßer <daniel.eysser@gmail.com>"
 license="GPL-2.0-or-later, LGPL-2.1-or-later"
 homepage="https://jackaudio.org/"
 distfiles="https://github.com/jackaudio/jack2/archive/v${version}.tar.gz"
-checksum=e176d04de94dcaa3f9d32ca1825091e1b938783a78c84e7466abd06af7637d37
+checksum=38f674bbc57852a8eb3d9faa1f96a0912d26f7d5df14c11005ad499c8ae352f2
 python_version=3
 
 # Package build options
 build_options="ffado"
 desc_option_ffado="Enable support for FireWire audio devices"
 
-if [ -z "CROSS_BUILD" ]; then
+if [ -z "$CROSS_BUILD" ]; then
 	makedepends+=" eigen"
 fi
 
@@ -39,6 +39,7 @@ libjack_package() {
 		vmove usr/lib/jack
 	}
 }
+
 jack-devel_package() {
 	depends="libjack>=${version}_${revision}"
 	short_desc+=" - development files"
